@@ -58,7 +58,7 @@ function getStatusText(status: string) {
   }
 }
 
-function useIsMobile(maxWidth: number = 400) {
+function useIsMobile(maxWidth: number = 730) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
