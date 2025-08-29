@@ -2142,7 +2142,10 @@ footer::before {
   .time-bold-bby {
     font-weight: bold;
     font-size: 0.6rem;
+    white-space: nowrap; /* evita que se rompa en varias líneas */
+    flex-shrink: 0;      /* no deja que el texto se reduzca */
   }
+
 
   .stat-item {
     display: flex;

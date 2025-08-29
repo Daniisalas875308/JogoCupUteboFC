@@ -17,10 +17,10 @@
 /* Panel grande central */
 .login-panel {
   width: 100%;
-  max-width: 500px;
+  max-width: 400px;
   background: #e7fbff;
   backdrop-filter: blur(25px);
-  padding: 3.5rem 2rem;
+  padding: 2rem 2rem;
   border-radius: 2rem;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
   text-align: center;
@@ -50,50 +50,66 @@
   font-weight: bold;
 }
 
-/* Inputs */
-.login-form input {
-  display: block;
-  width: 100%;
-  padding: 1rem;
-  margin-bottom: 1.5rem;
-  border-radius: 1rem;
-  border: 2px solid var(--jogo-blue-persa);
-  outline: none;
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--jogo-blue-persa);
-  font-size: 1rem;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.login-form input::placeholder {
-  color: var(--jogo-blue-persa);
-}
-
-.login-form input:focus {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.02);
-}
-
-/* Botón */
-.login-form button {
-  width: 30%;
-  padding: 0.8rem;
-  border-radius: 1rem;
-  border: 2px solid var(--jogo-yellow);
-  background: transparent;
-  color: var(--jogo-yellow);
+.link-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 12px;
+  margin: 20px 0;
+  text-decoration: none;
   font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: 0.3s;
+  border-radius: 8px;
+  transition: background-color 0.2s;
 }
 
-.login-form button:hover {
-  background: linear-gradient(135deg, #1e3a8a, #3b82f6, #facc15);
-  transform: scale(1.03);
-  border: 2px solid transparent;
+.boton-tiktok:hover {
+  background: linear-gradient(135deg, #00f2ea , #ff0050);
   color: white;
+  border: 2px solid transparent;
 }
+
+.boton-insta:hover {
+  background: linear-gradient(135deg, #e1306c , #f77737);
+  color: white;
+  border: 2px solid transparent;
+}
+
+.boton-gmail:hover {
+  background: linear-gradient(135deg, #EA4335 , #34A853, #FBBC05, #4285F4);
+  color: white;
+  border: 2px solid transparent;
+}
+
+.boton-web:hover {
+  background: linear-gradient(135deg,#1e3a8a, #3b82f6, #facc15);
+  color: white;
+  border: 2px solid transparent;
+}
+
+.boton-tiktok {
+  color: #00c2bc ;
+  border: 2px solid #00b7b1 ;
+}
+
+.boton-insta {
+  color: #ff008f;
+  border: 2px solid #ff008f;
+}
+
+.boton-gmail {
+  color: #EA4335;
+  border: 2px solid #EA4335;
+}
+
+.boton-web {
+  color: var(--jogo-blue-persa);
+  border: 2px solid var(--jogo-blue-persa);
+}
+
+.icono-redes {
+  font-size: 1.5rem;
+} 
 
 @media (max-width: 768px) {
   .login-panel {
@@ -102,23 +118,16 @@
     height: auto; /* mejor que 90% para landscape */
   }
 
-  .login-form button {
-    width: 30%;
-    padding: 0.6rem;
-    font-size: 0.88rem;
+  .link-button {
+    padding: 6px 10px;
+    gap: 8px;
+    font-size: 0.95rem;
+    width: 100%; /* asegura que no sobresalga */
+    margin: 15px 0;
   }
 
-  .login-form input {
-    display: block;
-    width: 100%;
-    padding: 0.8rem;
-    margin-bottom: 1rem;
-    font-size: 0.88rem;
-  }
-
-  .gradient-text {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+  .icono-redes {
+    font-size: 1.2rem;
   }
 }
 
@@ -131,17 +140,14 @@
     border-radius: 1.5rem;
   }
 
-  .login-form button {
-    width: 30%;
-    padding: 0.88rem;
+  .link-button {
+    flex-direction: row; /* Mantener fila, puedes usar column si quieres icono arriba */
+    padding: 8px 8px;
+    gap: 10px;
     font-size: 1rem;
   }
 
-  .login-form input {
-    display: block;
-    width: 100%;
-    padding: 0.8rem;
-    margin-bottom: 1rem;
-    font-size: 0.88rem;
+  .icono-redes {
+    font-size: 1.2rem;
   }
 }

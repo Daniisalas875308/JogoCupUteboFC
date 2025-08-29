@@ -132,7 +132,7 @@ export default function Overview() {
                   <p className="prize-desc">Tercer y cuarto lugar</p>
                 </div>
               </div>
-              <div className="time-bold-bby">Inscripción gratuita</div>
+              <div className="time-bold-bby">Inscripción gratuita 2ª edición</div>
             </div>
           </div>
         </div>
