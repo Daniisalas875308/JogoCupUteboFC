@@ -32,12 +32,12 @@ export default function Header() {
         {isMobile ? (
           <div className="header-content">
             <div className="title-section">
-              <h1 className="gradient-text">JOGO CUP UTEBO FC</h1>
+              <h1 className="text-blue">JOGO CUP</h1>
               <p className="subtitle"><strong>1ª Edición</strong></p>
             </div>
             <div className="logo-section">
               <div className="logo-container">
-                <img src="/logo.png" alt="JOGO CUP Logo" className="logo logo-glow" />
+                <img src="/logo-final-fondo.png" alt="JOGO CUP Logo" className="logo logo-glow" />
               </div>
             </div>
             <div className="login-section">
@@ -75,10 +75,10 @@ export default function Header() {
           <div className="header-content">
             <div className="logo-section">
               <div className="logo-container">
-                <img src="/logo.png" alt="JOGO CUP Logo" className="logo logo-glow" />
+                <img src="/logo-final-fondo.png" alt="JOGO CUP Logo" className="logo logo-glow" />
               </div>
               <div className="title-section">
-                <h1 className="gradient-text">JOGO CUP UTEBO FC</h1>
+                <h1 className="gradient-text">JOGO CUP</h1>
                 <p className="subtitle"><strong>1ª Edición</strong></p>
               </div>
             </div>

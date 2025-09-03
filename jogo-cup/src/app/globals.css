@@ -147,7 +147,8 @@ main {
   display: flex;
   align-items: center;
   gap: var(--spacing-4);
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* para que no salte a otra línea */
+  height: 100px; /* altura fija */
 }
 
 .logo-container {
@@ -155,8 +156,8 @@ main {
 }
 
 .logo {
-  height: 98px;
-  width: 98px;
+  height: 140px;
+  width: 140px;
   object-fit: contain;
 }
 
@@ -176,6 +177,10 @@ main {
   margin: 0;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   text-align: left;
+}
+
+.text-blue {
+  color: var(--jogo-blue-persa);
 }
 
 .gradient-text {
@@ -2711,8 +2716,8 @@ footer::before {
   }
 
   .logo {
-    height: 70px;
-    width: 70px;
+    height: 90px;
+    width: 90px;
     object-fit: contain;
   }
 
@@ -2910,8 +2915,8 @@ footer::before {
   }
 
   .logo {
-    height: 70px;
-    width: 70px;
+    height: 90px;
+    width: 90px;
     object-fit: contain;
   }
 

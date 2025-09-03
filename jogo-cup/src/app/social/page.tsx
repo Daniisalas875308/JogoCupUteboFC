@@ -11,9 +11,9 @@ export default function SocialPage() {
   const links = [ 
     { icon: <FaInstagram />, label: '@jogo_cup', url: 'https://www.instagram.com/jogo_cup?igsh=ZGZhaXZnbTJ4MW50', clase: styles['boton-insta'] },
     { icon: <FaTiktok />, label: '@jogo.cup.utebo', url: 'https://www.tiktok.com/@jogo.cup.utebo?_t=ZN-8zGNH8dASNq&_r=1', clase: styles['boton-tiktok'] },
-    { icon: <SiGmail />, label: 'jogo-cup@acnb.es', url: 'mailto:jogo-cup@acnb.es', clase: styles['boton-gmail'] },
+    { icon: <SiGmail />, label: 'jogocup@acnb.es', url: 'mailto:jogocup@acnb.es', clase: styles['boton-gmail'] },
     { icon: <FaGlobe />, label: 'Web', url: 'https://jogo-cup-utebo-fc.vercel.app/', clase: styles['boton-web'] },
-    { icon: <FaFileCircleCheck />, label: 'Preinscripciones', url: 'https://jogo-cup-utebo-fc.vercel.app/', clase: styles['boton-web'] },
+    { icon: <FaFileCircleCheck />, label: 'Preinscripciones', url: 'https://docs.google.com/forms/d/e/1FAIpQLSfAp9r-NpFJW_HImHRMzppNzUAfSJo64Rn5UUeeGd2OWAzYQQ/viewform?usp=dialog', clase: styles['boton-web'] },
   ];
  
   return (
