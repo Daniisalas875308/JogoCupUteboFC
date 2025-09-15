@@ -13,53 +13,58 @@ interface Equipo {
 
 export default function Groups() {
   const [groups, setGroups] = useState<Group[]>([]);
-  
+
   useEffect(() => {
-    interface Equipo {
-      id: number;
-      nombre: string;
-      puntos: number;
-    }
-
-    interface GrupoApi {
-      equipos: Equipo[];
-    }
-
-
     const fetchData = async () => {
+
+      interface Equipo {
+        id: number;
+        nombre: string;
+        logo_url?: string;
+        puntos: number;
+      }
+
+      interface EquiposFase {
+        id: number;
+        fase_id: number;
+        equipos: Equipo[];
+      }
+
+      interface Group {
+        name: string;
+        teams: Equipo[];
+      }
+
       try {
         // 🚀 traer dos grupos (faseId=1 y faseId=2)
-        const grupo1: GrupoApi = await getEquiposPorGrupo(1);
-        const grupo2: GrupoApi = await getEquiposPorGrupo(2);
-        const grupo3: GrupoApi = await getEquiposPorGrupo(3);
-        const grupo4: GrupoApi = await getEquiposPorGrupo(4);
-        const grupo5: GrupoApi = await getEquiposPorGrupo(5);
-        const grupo6: GrupoApi = await getEquiposPorGrupo(6);
+        const grupo1: EquiposFase[] = await getEquiposPorGrupo(1);
+        const grupo2: EquiposFase[] = await getEquiposPorGrupo(2);
+        const grupo3: EquiposFase[] = await getEquiposPorGrupo(3);
+        const grupo4: EquiposFase[] = await getEquiposPorGrupo(4);
+        const grupo5: EquiposFase[] = await getEquiposPorGrupo(5);
+        const grupo6: EquiposFase[] = await getEquiposPorGrupo(6);
 
         setGroups([
-          {
-            name: "Grupo 1",
-            teams: grupo1.equipos,
-          },
+          { name: "Grupo 1", teams: grupo1.flatMap(g => g.equipos) },
           {
             name: "Grupo 2",
-            teams: grupo2.equipos,
+            teams: grupo2.flatMap(g => g.equipos),
           },
           {
             name: "Grupo 3",
-            teams: grupo3.equipos,
+            teams: grupo3.flatMap(g => g.equipos),
           },
           {
             name: "Grupo 4",
-            teams: grupo4.equipos,
+            teams: grupo4.flatMap(g => g.equipos),
           },
           {
             name: "Grupo 5",
-            teams: grupo5.equipos,
+            teams: grupo5.flatMap(g => g.equipos),
           },
           {
             name: "Grupo 6",
-            teams: grupo6.equipos,
+            teams: grupo6.flatMap(g => g.equipos),
           },
         ]);
       } catch (err) {
