@@ -74,8 +74,20 @@ function useIsMobile(maxWidth: number = 730) {
 }
 
 export default function Schedule() {
+  interface Match {
+    id: number;
+    goles_local: number;
+    goles_visitante: number;
+    fecha: string;
+    estado: string;
+    fase_id: { nombre: string } | null;
+    campo: string;
+    equipo_local: { nombre: string } | null;
+    equipo_visitante: { nombre: string } | null;
+  }
+  
   const [selectedDay, setSelectedDay] = useState<"friday" | "saturday" | "sunday">("friday");
-  const [matches, setMatches] = useState<any[]>([]);
+  const [matches, setMatches] = useState<Match[]>([]);
   const [loading, setLoading] = useState(false);
   const isMobile = useIsMobile();
 
@@ -153,7 +165,7 @@ export default function Schedule() {
                       <>
                         <div className="match-teams">
                           <div className="match-title">{match.equipo_visitante?.nombre} vs {match.equipo_local?.nombre}</div>
-                          <div className="match-desc">{match.fase?.nombre ?? "Sin fase"}</div>
+                          <div className="match-desc">{match.fase_id?.nombre ?? "Sin fase"}</div>
                         </div>
                         <div className="match-field">
                           <FaMapMarkerAlt className="icono-ubi" />

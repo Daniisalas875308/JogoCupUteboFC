@@ -23,10 +23,20 @@ function getStatusText(status: string) {
 }
 
 export default function Results() {
+  interface Match {
+    id: number;
+    goles_local: number;
+    goles_visitante: number;
+    fecha: string;
+    estado: string;
+    equipo_local: { nombre: string } | null;
+    equipo_visitante: { nombre: string } | null;
+  }
+
   const [lastUpdate, setLastUpdate] = useState("--:--");
   const [selectedFase, setSelectedFase] = useState<keyof typeof resultsData>("grupoA");
   const currentFase = resultsData[selectedFase];
-  const [matches, setMatches] = useState<any[]>([]);
+  const [matches, setMatches] = useState<Match[]>([]);
   const [loading, setLoading] = useState(false);
   const fases = [
     { value: "grupoA", label: "Grupo A" },

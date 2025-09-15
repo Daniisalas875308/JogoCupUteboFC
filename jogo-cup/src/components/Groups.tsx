@@ -13,42 +13,53 @@ interface Equipo {
 
 export default function Groups() {
   const [groups, setGroups] = useState<Group[]>([]);
-
+  
   useEffect(() => {
+    interface Equipo {
+      id: number;
+      nombre: string;
+      puntos: number;
+    }
+
+    interface GrupoApi {
+      equipos: Equipo[];
+    }
+
+
     const fetchData = async () => {
       try {
         // 🚀 traer dos grupos (faseId=1 y faseId=2)
-        const grupo1 = await getEquiposPorGrupo(1);
-        const grupo2 = await getEquiposPorGrupo(2);
-        const grupo3 = await getEquiposPorGrupo(3);
-        const grupo4 = await getEquiposPorGrupo(4);
-        const grupo5 = await getEquiposPorGrupo(5);
-        const grupo6 = await getEquiposPorGrupo(6);
+        const grupo1: GrupoApi = await getEquiposPorGrupo(1);
+        const grupo2: GrupoApi = await getEquiposPorGrupo(2);
+        const grupo3: GrupoApi = await getEquiposPorGrupo(3);
+        const grupo4: GrupoApi = await getEquiposPorGrupo(4);
+        const grupo5: GrupoApi = await getEquiposPorGrupo(5);
+        const grupo6: GrupoApi = await getEquiposPorGrupo(6);
 
         setGroups([
           {
             name: "Grupo 1",
-            teams: grupo1.map((item: any) => item.equipos),
+            teams: grupo1.equipos,
           },
           {
             name: "Grupo 2",
-            teams: grupo2.map((item: any) => item.equipos),
+            teams: grupo2.equipos,
           },
           {
             name: "Grupo 3",
-            teams: grupo3.map((item: any) => item.equipos),
+            teams: grupo3.equipos,
           },
           {
             name: "Grupo 4",
-            teams: grupo4.map((item: any) => item.equipos),
+            teams: grupo4.equipos,
           },
           {
             name: "Grupo 5",
-            teams: grupo5.map((item: any) => item.equipos),
+            teams: grupo5.equipos,
           },
           {
             name: "Grupo 6",
-            teams: grupo6.map((item: any) => item.equipos),
+            teams: grupo6.equipos,
           },
         ]);
       } catch (err) {

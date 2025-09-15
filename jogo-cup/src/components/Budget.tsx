@@ -134,13 +134,27 @@ const handleSubmitIngreso = async (e: React.FormEvent<HTMLFormElement>) => {
   }
 };
 
+interface GastoApi {
+  nombre: string;
+  monto: number | string;
+  fecha: string;
+  usuario?: string;
+}
+
+interface IngresoApi {
+  nombre: string;
+  monto: number | string;
+  fecha: string;
+  usuario?: string;
+}
+
 const fetchEconomia = async () => {
   try {
-    const gastosApi = await getEconomia("gasto");
-    const ingresosApi = await getEconomia("ingreso");
+    const gastosApi: GastoApi[] = await getEconomia("gasto");
+    const ingresosApi: IngresoApi[] = await getEconomia("ingreso");
 
     setGastos(
-      gastosApi.map((item: any) => ({
+      gastosApi.map((item) => ({
         title: item.nombre || "Sin título",
         category: "General",
         amount: Number(item.monto),
@@ -152,7 +166,7 @@ const fetchEconomia = async () => {
     );
 
     setIngresos(
-      ingresosApi.map((item: any) => ({
+      ingresosApi.map((item) => ({
         title: item.nombre || "Sin título",
         level: "General",
         amount: Number(item.monto),
@@ -162,8 +176,8 @@ const fetchEconomia = async () => {
       }))
     );
 
-    const totalGastos = gastosApi.reduce((acc: number, g: any) => acc + Number(g.monto), 0);
-    const totalIngresos = ingresosApi.reduce((acc: number, i: any) => acc + Number(i.monto), 0);
+    const totalGastos = gastosApi.reduce((acc: number, g) => acc + Number(g.monto), 0);
+    const totalIngresos = ingresosApi.reduce((acc: number, i) => acc + Number(i.monto), 0);
     setBalanceTotal(totalIngresos - totalGastos);
 
   } catch (error) {
