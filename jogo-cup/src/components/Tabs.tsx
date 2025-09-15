@@ -10,10 +10,11 @@ interface TabsProps {
 }
 
 export default function Tabs({ activeTab, setActiveTab }: TabsProps) {
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    setIsAdmin(localStorage.getItem('admin') === 'true');
+    const token = localStorage.getItem('token'); // comprobamos si hay JWT
+    setIsLoggedIn(!!token); // true si existe, false si no
   }, []);
 
   const tabs = [
@@ -29,7 +30,7 @@ export default function Tabs({ activeTab, setActiveTab }: TabsProps) {
   ];
 
   const restrictedTabs = ['budget', 'documents'];
-  const visibleTabs = tabs.filter(tab => !restrictedTabs.includes(tab.id) || isAdmin);
+  const visibleTabs = tabs.filter(tab => !restrictedTabs.includes(tab.id) || isLoggedIn);
 
   return (
     <div className="tabs-container">

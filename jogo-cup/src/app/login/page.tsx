@@ -5,23 +5,40 @@ import { useRouter } from 'next/navigation'; // Hook de navegación
 import { FaRegUserCircle } from 'react-icons/fa';
 import styles from './login.module.css';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(''); // para mostrar error
   const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
 
-    // Validación simple
-    if (email === 'admin' && password === '12345') {
-        localStorage.setItem('admin', 'true');
-        router.push('/'); // redirige a la página principal
+  try {
+    const res = await fetch(`${API_URL}/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre: email, password }),
+    });
+
+    const data = await res.json();
+    console.log("Recibo esto del login:", data);
+
+    if (!res.ok) {
+      setError(data.error || 'Error de login');
     } else {
-        setError('Usuario o contraseña incorrectos');
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('nombre', data.nombre);
+      localStorage.setItem('id_user', data.id);
+      router.push('/'); // Redirige al dashboard
     }
-  };
+  } catch (err) {
+    console.error(err);
+    setError('Error de conexión con el servidor');
+  }
+};
 
   return (
     <div className={styles['login-page']}>

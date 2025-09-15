@@ -19,11 +19,26 @@ function useIsMobile(maxWidth: number = 600) {
 }
 
 export default function Header() {
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [user, setUser] = useState<string | null>(null);
   const isMobile = useIsMobile();
   useEffect(() => {
-    setIsAdmin(localStorage.getItem('admin') === 'true');
+    const token = localStorage.getItem('token');
+    const nombre = localStorage.getItem('nombre');
+
+    if (token && nombre) {
+      setUser(nombre); // usuario logueado
+    } else {
+      setUser(null); // no logueado
+    }
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');   // borramos el token JWT
+    localStorage.removeItem('nombre');  // borramos el nombre (opcional)
+    localStorage.removeItem('id_user');  // borramos el id_user (opcional)
+    setUser(null);                      // actualizamos estado de sesión
+    window.location.href = "/";    // redirigimos al login
+  };
 
   return (
     <header className="jogo-header">
@@ -41,17 +56,12 @@ export default function Header() {
               </div>
             </div>
             <div className="login-section">
-              {isAdmin ? ( 
+              {user  ? ( 
                 <div className="login-link">
-                  <button
-                    onClick={() => {
-                      localStorage.removeItem('admin'); // borramos la variable admin
-                      window.location.href = "/"; // redirigimos a login (o "/")
-                    }}
-                    className="logout-button"
-                  >
+                  <button onClick={handleLogout} className="logout-button">
+                    <p><strong>Cerrar Sesión</strong></p>
                     <IoIosLogOut className="logout-icon"/>
-                  </button>
+                </button>
                 </div>
               ) : (
                 <div className="login-link">
@@ -83,15 +93,9 @@ export default function Header() {
               </div>
             </div>
             <div className="login-section">
-              {isAdmin ? ( 
+              {user  ? ( 
                 <div className="login-link">
-                  <button
-                    onClick={() => {
-                      localStorage.removeItem('admin'); // borramos la variable admin
-                      window.location.href = "/"; // redirigimos a login (o "/")
-                    }}
-                    className="logout-button"
-                  >
+                  <button onClick={handleLogout} className="logout-button">
                     <p><strong>Cerrar Sesión</strong></p>
                     <IoIosLogOut className="logout-icon"/>
                   </button>

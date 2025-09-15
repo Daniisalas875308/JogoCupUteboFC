@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect  } from "react";
 import { FiRefreshCw } from "react-icons/fi";
 import { resultsData } from "../data/resultsData"; // Ajusta la ruta según tu estructura
 import { FiChevronDown } from "react-icons/fi";
@@ -6,7 +6,7 @@ import { FaTrophy } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa6";
 import { IoIosFootball } from "react-icons/io";
 import { IoFootball } from "react-icons/io5";
-
+import { getPartidosPorFase } from "./api";
 
 
 function getStatusText(status: string) {
@@ -26,6 +26,8 @@ export default function Results() {
   const [lastUpdate, setLastUpdate] = useState("--:--");
   const [selectedFase, setSelectedFase] = useState<keyof typeof resultsData>("grupoA");
   const currentFase = resultsData[selectedFase];
+  const [matches, setMatches] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
   const fases = [
     { value: "grupoA", label: "Grupo A" },
     { value: "grupoB", label: "Grupo B" },
@@ -39,12 +41,42 @@ export default function Results() {
     { value: "final", label: "Final" },
   ];
 
+  const faseMap: Record<string, number> = {
+    grupoA: 1,
+    grupoB: 2,
+    grupoC: 3,
+    grupoD: 4,
+    grupoE: 5,
+    grupoF: 6,
+    octavos: 7,
+    cuartos: 8,
+    semis: 9,
+    final: 10,
+  };
+  
   const [open, setOpen] = useState(false);
 
   const refreshResults = () => {
     setLastUpdate(new Date().toLocaleTimeString());
   };
 
+  useEffect(() => {
+    const loadMatches = async () => {
+      setLoading(true);
+      try {
+        const data = await getPartidosPorFase(faseMap[selectedFase]);
+        setMatches(data);
+      } catch (err) {
+        console.error("Error cargando partidos por fase:", err);
+        setMatches([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadMatches();
+  }, [selectedFase]);
+  
   return (
     <div className="tab-content animate-fade-in">
       <div className="results-header">
@@ -64,11 +96,9 @@ export default function Results() {
               {fases.map((fase) => (
                 <li
                   key={fase.value}
-                  className={`dropdown-item ${
-                    fase.value === selectedFase ? "active" : ""
-                  }`}
+                  className={`dropdown-item ${fase.value === selectedFase ? "active" : ""}`}
                   onClick={() => {
-                    setSelectedFase(fase.value as typeof selectedFase);
+                    setSelectedFase(fase.value as typeof selectedFase); // <-- esto dispara el useEffect
                     setOpen(false);
                   }}
                 >
@@ -90,19 +120,26 @@ export default function Results() {
           </h3>
         </div>
         <div className="card-content">
-          {currentFase.matches.map((match, idx) => (
+          {loading && <p>Cargando partidos...</p>}
+          {!loading && matches.length === 0 && <p>No hay resultados en esta fase todavía.</p>}
+
+          {!loading && matches.map((match, idx) => (
             <div className={`${match.estado}-match`} key={idx}>
               <div className="match-info-results">
                 <div className="match-status-results">
-                  <span className={`badge ${match.estado}-badge`}>{getStatusText(match.estado)}</span>
+                  <span className={`badge ${match.estado}-badge`}>
+                    {getStatusText(match.estado)}
+                  </span>
                 </div>
                 <div className="match-centrado">
                   <div className="match-teams-live">
-                    <div className="team-name">{match.equipo1}</div>
+                    <div className="team-name">{match.equipo_local?.nombre}</div>
                     <div className="match-score">
-                      <div className="score-value jogo-primary">{match.resultado}</div>
+                      <div className="score-value jogo-primary">
+                        {match.goles_local} - {match.goles_visitante}
+                      </div>
                     </div>
-                    <div className="team-name">{match.equipo2}</div>
+                    <div className="team-name">{match.equipo_visitante?.nombre}</div>
                   </div>
                 </div>
               </div>

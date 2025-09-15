@@ -5,7 +5,8 @@ import { ReactNode } from "react";
 import { TbPigMoney } from "react-icons/tb";
 import { MdCurrencyExchange } from "react-icons/md";
 import { GiReceiveMoney, GiPayMoney  } from "react-icons/gi";
-
+import { getEconomia } from "./api"; 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 import { 
   FaEuroSign,FaBalanceScale , FaTrophy, FaUsers, FaShieldAlt, FaUtensils, FaBullhorn, FaFileAlt, FaMoneyBillAlt, FaCalendarDay } from "react-icons/fa";
 
@@ -72,24 +73,114 @@ const closeModalIngreso = () => {
   setIsModalOpenIngreso(false);
 };
 
-const handleSubmitIngreso = (e: React.FormEvent<HTMLFormElement>) => {
+const handleSubmitGasto = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
-  closeModalIngreso();
+
+  const formData = new FormData(e.currentTarget);
+  const nuevoGasto = {
+    nombre: formData.get("nombre") as string,
+    tipo: "gasto",
+    monto: parseFloat(formData.get("amount") as string),
+    descripcion: formData.get("descripcion") as string,
+    user_id: localStorage.getItem('id_user'),
+  };
+
+  try {
+    const res = await fetch(`${API_URL}/economia`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(nuevoGasto),
+    });
+
+    if (!res.ok) throw new Error("Error al guardar gasto");
+
+    const data = await res.json();
+    console.log("Gasto añadido:", data);
+    await fetchEconomia();
+    closeModalGasto();
+  } catch (err) {
+    console.error(err);
+  }
 };
 
-const handleSubmitGasto = (e: React.FormEvent<HTMLFormElement>) => {
+// Enviar ingreso
+const handleSubmitIngreso = async (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
-  closeModalGasto();
+
+  const formData = new FormData(e.currentTarget);
+  const nuevoIngreso = {
+    nombre: formData.get("nombre") as string,
+    tipo: "ingreso",
+    monto: parseFloat(formData.get("amount") as string),
+    descripcion: formData.get("descripcion") as string,
+    user_id: localStorage.getItem('id_user'), // idem: debería ser ID, no nombre
+  };
+
+  try {
+    const res = await fetch(`${API_URL}/economia`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(nuevoIngreso),
+    });
+
+    if (!res.ok) throw new Error("Error al guardar ingreso");
+
+    const data = await res.json();
+    console.log("Ingreso añadido:", data);
+    await fetchEconomia();
+    closeModalIngreso();
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const fetchEconomia = async () => {
+  try {
+    const gastosApi = await getEconomia("gasto");
+    const ingresosApi = await getEconomia("ingreso");
+
+    setGastos(
+      gastosApi.map((item: any) => ({
+        title: item.nombre || "Sin título",
+        category: "General",
+        amount: Number(item.monto),
+        date: item.fecha,
+        person: item.usuario || "Desconocido",
+        color: "#E74C3C",
+        colorname: "red",
+      }))
+    );
+
+    setIngresos(
+      ingresosApi.map((item: any) => ({
+        title: item.nombre || "Sin título",
+        level: "General",
+        amount: Number(item.monto),
+        date: item.fecha,
+        person: item.usuario || "Desconocido",
+        color: "#0f8139",
+      }))
+    );
+
+    const totalGastos = gastosApi.reduce((acc: number, g: any) => acc + Number(g.monto), 0);
+    const totalIngresos = ingresosApi.reduce((acc: number, i: any) => acc + Number(i.monto), 0);
+    setBalanceTotal(totalIngresos - totalGastos);
+
+  } catch (error) {
+    console.error("Error cargando datos de economía:", error);
+  }
 };
 
 useEffect(() => {
   // cargamos los datos desde budgetData
   setTotal(budgetData.total);
   setCategories(budgetData.categories);
-  setBalanceTotal(balanceData.total);
-  setGastos(balanceData.gastos);
-  setIngresos(balanceData.ingresos);
 }, []);
+
+useEffect(() => {
+  fetchEconomia();
+}, []);
+
 
 useEffect(() => {
   if (isModalOpenGasto || isModalOpenIngreso) {
@@ -148,19 +239,13 @@ return (
           <h1 className="gradient-text">Añadir Nuevo Gasto</h1>
           <form onSubmit={handleSubmitGasto} className="modal-form">
             <label>
-              <input type="text" name="title" placeholder="Título" required />
+              <input type="text" name="nombre" placeholder="Nombre" required />
             </label>
             <label>
-              <input type="text" name="category" placeholder="Categoría" required />
-            </label>
-            <label>
-              <input type="text" name="person" placeholder="Responsable" required />
+              <input type="text" name="descripcion" placeholder="Descripción" required />
             </label>
             <label>
               <input type="number" name="amount" placeholder="€" required />
-            </label>
-            <label>
-              <input type="text" name="date" placeholder="Fecha" required />
             </label>
             <button type="submit">Guardar</button>
             <button type="button" onClick={closeModalGasto}>
@@ -193,20 +278,14 @@ return (
         >
           <h1 className="gradient-text">Añadir Nuevo Ingreso</h1>
           <form onSubmit={handleSubmitIngreso} className="modal-form">
-            <label>
-              <input type="text" name="title" placeholder="Título" required />
+           <label>
+              <input type="text" name="nombre" placeholder="Nombre" required />
             </label>
             <label>
-              <input type="text" name="level" placeholder="Nivel" required />
-            </label>
-            <label>
-              <input type="text" name="person" placeholder="Responsable" required />
+              <input type="text" name="descripcion" placeholder="Descripción" required />
             </label>
             <label>
               <input type="number" name="amount" placeholder="€" required />
-            </label>
-            <label>
-              <input type="text" name="date" placeholder="Fecha" required />
             </label>
             <button type="submit">Guardar</button>
             <button type="button" onClick={closeModalIngreso}>
@@ -324,7 +403,7 @@ return (
             </div>
             <div className="card-content-balance">
               {ingresos.map((item, index) => (
-                <div className={`gastos-card ${item.level}-card`} key={index}>
+                <div className={`gastos-card green-card`} key={index}>
                   {/* Columna izquierda */}
                   <div className="gastos-left">
                     <div className="balance-header">

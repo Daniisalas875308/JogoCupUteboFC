@@ -6,6 +6,7 @@ import { CgMediaLive } from "react-icons/cg";
 import { FaCalendarDay } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { scheduleData } from "../data/scheduleData"; // Ajusta la ruta según tu estructura
+import { getPartidosPorDia } from "./api"; 
 
 function getStatusBadgeClass(status: string) {
   switch (status) {
@@ -13,7 +14,7 @@ function getStatusBadgeClass(status: string) {
       return "badge-red";
     case "en vivo":
       return "badge-green";
-    case "programado":
+    case "pendiente":
       return "badge-blue";
     case "actividad":
       return "badge-yellow";
@@ -30,7 +31,7 @@ function getStatusIcon(status: string) {
       return <ImCross />;
     case "en vivo":
       return <CgMediaLive />;
-    case "programado":
+    case "pendiente":
       return <FaClock />;
     case "actividad":
       return <FaBolt />;
@@ -73,10 +74,39 @@ function useIsMobile(maxWidth: number = 730) {
 }
 
 export default function Schedule() {
-  const [selectedDay, setSelectedDay] = useState<keyof typeof scheduleData>("friday");
-  const currentDay = scheduleData[selectedDay];
-  const isMobile = useIsMobile(); // 👈 así ya tienes la variable booleana
+  const [selectedDay, setSelectedDay] = useState<"friday" | "saturday" | "sunday">("friday");
+  const [matches, setMatches] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+  const isMobile = useIsMobile();
 
+  const dates: Record<typeof selectedDay, { title: string; titleEscrito: string; dateEscrito:string; date: string }> = {
+    friday: { title: "Viernes", titleEscrito: "Viernes - Fase de grupos", dateEscrito: "26 de Diciembre, 2025", date: "2025-12-26" },
+    saturday: { title: "Sábado", titleEscrito: "Sábado - Fase de grupos", dateEscrito: "27 de Diciembre, 2025", date: "2025-12-27" },
+    sunday: { title: "Domingo", titleEscrito: "Domingo - Fase Final", dateEscrito: "28 de Diciembre, 2025", date: "2025-12-28" },
+  };
+
+  useEffect(() => {
+    const load = async () => {
+      setLoading(true);
+      try {
+        const data = await getPartidosPorDia(dates[selectedDay].date);
+        setMatches(data);
+      } catch (err) {
+        console.error("Error cargando partidos:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    load();
+  }, [selectedDay]);
+
+  const formatTime = (isoTs: string) =>
+    new Date(isoTs).toLocaleTimeString("es-ES", {
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZone: "Europe/Madrid",
+    });
+    
   return (
     <div className="tab-content animate-fade-in" id="schedule">
       <div className="schedule-controls">
@@ -106,51 +136,49 @@ export default function Schedule() {
       <div className="jogo-card schedule-card">
         <div className="card-header">
           <h3 className="card-title jogo-primary" id="scheduleTitle">
-            <i className="fas fa-calendar"><FaCalendarDay  /> </i>
-            {currentDay.title}
+            <FaCalendarDay /> {dates[selectedDay].titleEscrito}
           </h3>
-          <p className="schedule-day" id="scheduleDate">{currentDay.date}</p>
+          <p className="schedule-day" id="scheduleDate">{dates[selectedDay].dateEscrito}</p>
         </div>
         <div className="card-content match-group">
           <div className="matches-container" id="matchesContainer">
-            {currentDay.matches.map((match, idx) => (
-              <div className={`match-item ${match.isActivity ? 'activity' : ''}`} key={idx}>
-                <div className="match-info">
-                  <div className="match-time">
-                    <div className="match-time-value jogo-primary">{match.time}</div>
-                  </div>
+            {!loading && matches.length === 0 && <p>No hay partidos este día.</p>}
+              {matches.map((match) => (
+                <div className="match-item" key={match.id}>
+                  <div className="match-info">
+                    <div className="match-time">
+                      <div className="match-time-value jogo-primary">{formatTime(match.fecha)}</div>
+                    </div>
                     {isMobile ? (
                       <>
                         <div className="match-teams">
-                          <div className="match-title">{match.teams[1]}</div>
-                          <div className="match-desc">{match.teams[0]}</div>
+                          <div className="match-title">{match.equipo_visitante?.nombre} vs {match.equipo_local?.nombre}</div>
+                          <div className="match-desc">{match.fase?.nombre ?? "Sin fase"}</div>
                         </div>
                         <div className="match-field">
-                          <FaMapMarkerAlt className="icono-ubi"/>
-                          <span>{match.field}</span>
+                          <FaMapMarkerAlt className="icono-ubi" />
+                          <span>Campo {match.campo}</span>
                         </div>
                       </>
                     ) : (
                       <>
                         <div className="match-field">
-                          <i className="fas fa-map-marker-alt"><FaMapMarkerAlt /></i>
-                          <span>{match.field}</span>
+                          <FaMapMarkerAlt /> <span>Campo {match.campo}</span>
                         </div>
                         <div className="match-teams">
-                          <div className="match-title">{match.teams[1]}</div>
-                          <div className="match-desc">{match.teams[0]}</div>
+                          <div className="match-title">{match.equipo_visitante?.nombre} vs {match.equipo_local?.nombre}</div>
+                          <div className="match-desc">{match.fase_id?.nombre ?? "Sin fase"}</div>
                         </div>
                       </>
                     )}
+                  </div>
+                  <div className="match-status">
+                    <span className={`badge ${getStatusBadgeClass(match.estado)}`}>
+                      {getStatusIcon(match.estado)} {getStatusText(match.estado)}
+                    </span>
+                  </div>
                 </div>
-                <div className={`match-status`}>
-                  <span className={`badge ${getStatusBadgeClass(match.status)}`}>
-                    {getStatusIcon(match.status)}
-                    {getStatusText(match.status)}
-                  </span>
-                </div>
-            </div>
-            ))}
+              ))}
           </div>
         </div>
       </div>
