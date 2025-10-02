@@ -59,7 +59,6 @@ export default function Header() {
               {user  ? ( 
                 <div className="login-link">
                   <button onClick={handleLogout} className="logout-button">
-                    <p><strong>Cerrar Sesión</strong></p>
                     <IoIosLogOut className="logout-icon"/>
                 </button>
                 </div>
