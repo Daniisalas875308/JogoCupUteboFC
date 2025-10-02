@@ -143,13 +143,13 @@ export default function Results() {
                 </div>
                 <div className="match-centrado">
                   <div className="match-teams-live">
-                    <div className="team-name">{match.equipo_local?.nombre}</div>
+                    <div className="team-name">{(match.equipo_local?.nombre ?? "Equipo 1")}</div>
                     <div className="match-score">
                       <div className="score-value jogo-primary">
                         {match.goles_local} - {match.goles_visitante}
                       </div>
                     </div>
-                    <div className="team-name">{match.equipo_visitante?.nombre}</div>
+                    <div className="team-name">{(match.equipo_visitante?.nombre ?? "Equipo 2")}</div>
                   </div>
                 </div>
               </div>

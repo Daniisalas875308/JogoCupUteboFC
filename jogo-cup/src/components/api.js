@@ -1,5 +1,5 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
+console.log("API_URL:", API_URL);
 export const getUsuarios = async () => {
   const res = await fetch(`${API_URL}/usuarios`);
   return res.json();

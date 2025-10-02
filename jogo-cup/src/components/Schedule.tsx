@@ -84,6 +84,7 @@ export default function Schedule() {
     campo: string;
     equipo_local: { nombre: string } | null;
     equipo_visitante: { nombre: string } | null;
+    tipo: string;
   }
   
   const [selectedDay, setSelectedDay] = useState<"friday" | "saturday" | "sunday">("friday");
@@ -156,39 +157,84 @@ export default function Schedule() {
           <div className="matches-container" id="matchesContainer">
             {!loading && matches.length === 0 && <p>No hay partidos este día.</p>}
               {matches.map((match) => (
-                <div className="match-item" key={match.id}>
-                  <div className="match-info">
-                    <div className="match-time">
-                      <div className="match-time-value jogo-primary">{formatTime(match.fecha)}</div>
+                <div className={`match-item ${match.tipo === "actividad" ? "activity" : "partido"}`} key={match.id}>
+                  {match.tipo === "partido" ? (
+                    <>
+                    <div className="match-info">
+                      <div className="match-time">
+                        <div className="match-time-value jogo-primary">{formatTime(match.fecha)}</div>
+                      </div>
+                      {isMobile ? (
+                        <>
+                          <div className="match-teams">
+                            <div className="match-title">
+                              {(match.equipo_local?.nombre ?? "Equipo 1")} vs {(match.equipo_visitante?.nombre ?? "Equipo 2")}
+                            </div>
+                            <div className="match-desc">{match.fase_id?.nombre ?? "Sin fase"}</div>
+                          </div>
+                          <div className="match-field">
+                            <FaMapMarkerAlt className="icono-ubi" />
+                            <span>Campo {match.campo}</span>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="match-field">
+                            <FaMapMarkerAlt /> <span>Campo {match.campo}</span>
+                          </div>
+                          <div className="match-teams">
+                            <div className="match-title">
+                              {(match.equipo_local?.nombre ?? "Equipo 1")} vs {(match.equipo_visitante?.nombre ?? "Equipo 2")}
+                            </div>
+                            <div className="match-desc">{match.fase_id?.nombre ?? "Sin fase"}</div>
+                          </div>
+                        </>
+                      )}
                     </div>
-                    {isMobile ? (
-                      <>
-                        <div className="match-teams">
-                          <div className="match-title">{match.equipo_visitante?.nombre} vs {match.equipo_local?.nombre}</div>
-                          <div className="match-desc">{match.fase_id?.nombre ?? "Sin fase"}</div>
-                        </div>
-                        <div className="match-field">
-                          <FaMapMarkerAlt className="icono-ubi" />
-                          <span>Campo {match.campo}</span>
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <div className="match-field">
-                          <FaMapMarkerAlt /> <span>Campo {match.campo}</span>
-                        </div>
-                        <div className="match-teams">
-                          <div className="match-title">{match.equipo_visitante?.nombre} vs {match.equipo_local?.nombre}</div>
-                          <div className="match-desc">{match.fase_id?.nombre ?? "Sin fase"}</div>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                  <div className="match-status">
-                    <span className={`badge ${getStatusBadgeClass(match.estado)}`}>
-                      {getStatusIcon(match.estado)} {getStatusText(match.estado)}
-                    </span>
-                  </div>
+                    <div className="match-status">
+                      <span className={`badge ${getStatusBadgeClass(match.estado)}`}>
+                        {getStatusIcon(match.estado)} {getStatusText(match.estado)}
+                      </span>
+                    </div>
+                    </>
+                  ) : (
+                    <>
+                    <div className="match-info">
+                      <div className="match-time">
+                        <div className="match-time-value jogo-primary">{formatTime(match.fecha)}</div>
+                      </div>
+                      {isMobile ? (
+                        <>
+                          <div className="match-teams">
+                            <div className="match-title">
+                              {match.fase_id?.nombre ?? "Sin fase"}
+                            </div>
+                          </div>
+                          <div className="match-field">
+                            <FaMapMarkerAlt className="icono-ubi" />
+                            <span>Campo {match.campo}</span>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="match-field">
+                            <FaMapMarkerAlt /> <span>Campo {match.campo}</span>
+                          </div>
+                          <div className="match-teams">
+                            <div className="match-title">
+                              {match.fase_id?.nombre ?? "Sin fase"}
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    <div className="match-status">
+                      <span className={`badge ${getStatusBadgeClass(match.estado)}`}>
+                        {getStatusIcon(match.estado)} {getStatusText(match.estado)}
+                      </span>
+                    </div>
+                    </>
+                  )}
                 </div>
               ))}
           </div>
