@@ -1,39 +1,37 @@
-import { FaChildReaching } from "react-icons/fa6";
+import { useEffect, useState } from "react";
+import Overview from "./junior/OverviewJr";
+import Groups from "../components/junior/GroupsJr";
+import Schedule from "../components/junior/ScheduleJr";
+import Results from "../components/junior/ResultsJr";
 
-export default function Under16() {
+interface Under16Props {
+  section?: string; // puede venir "overview" | "groups" | "schedule" | "results"
+}
+
+export default function Under16({ section = "overview" }: Under16Props) {
+  const [activeTabJr, setActiveTabJr] = useState<string>(section);
+
+  useEffect(() => {
+    const handleUnload = () => {
+      localStorage.removeItem('admin');
+    };
+    window.addEventListener('beforeunload', handleUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleUnload);
+    };
+  }, []);
+
+  // Si cambia la prop desde Home (ej. user clicó Sub-16 -> Groups), sincronizamos el estado interno
+  useEffect(() => {
+    setActiveTabJr(section);
+  }, [section]);
+
   return (
-    <div className="tab-content animate-fade-in">
-      <div className="jogo-card">
-        <div className="card-header">
-          <h3 className="card-title jogo-primary">
-            <FaChildReaching /> Maratón Sub-16
-          </h3>
-        </div>
-        <div className="card-content">
-          <div className="under16-info">
-            <div className="info-section">
-              <h4>Información General</h4>
-              <p>Torneo especial para jugadores menores de 16 años</p>
-              <p>
-                <strong>Fecha límite de inscripción:</strong> 20 de Junio de 2024 - 14:00 horas
-              </p>
-              <p>
-                <strong>Contacto:</strong> info@jogocup.com
-              </p>
-            </div>
-
-            <div className="info-section">
-              <h4>Documentación Requerida</h4>
-              <ul>
-                <li>Hoja de inscripción completa</li>
-                <li>Autorización de menores firmada</li>
-                <li>Copia del DNI del menor</li>
-                <li>Copia del DNI del tutor legal</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <main className="container main-content">
+      {activeTabJr === "overview" && <Overview />}
+      {activeTabJr === "groups" && <Groups />}
+      {activeTabJr === "schedule" && <Schedule />}
+      {activeTabJr === "results" && <Results />}
+    </main>
   );
 }

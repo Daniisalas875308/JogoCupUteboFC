@@ -1,17 +1,17 @@
 import { useState, useEffect  } from "react";
 import { FiRefreshCw } from "react-icons/fi";
-import { resultsData } from "../data/resultsData"; // Ajusta la ruta según tu estructura
+import { resultsData } from "../../data/resultsData"; // Ajusta la ruta según tu estructura
 import { FiChevronDown } from "react-icons/fi";
 import { FaTrophy } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa6";
 import { IoIosFootball } from "react-icons/io";
 import { IoFootball } from "react-icons/io5";
-import { getPartidosPorFase, updateResultadoPartido } from "./api";
+import { getPartidosPorFase, updateResultadoPartido } from "../api";
 import { MdEdit } from "react-icons/md";
 import { Pencil } from "lucide-react";
-import EditMatchModal from "../components/EditMatchModal";
+import EditMatchModal from "../../components/EditMatchModal";
 import { io } from "socket.io-client";
-import { connectSocket, disconnectSocket } from "../socket";
+import { connectSocket, disconnectSocket } from "../../socket";
 
 
 
@@ -30,7 +30,7 @@ function getStatusText(status: string) {
 }
 
 
-export default function Results() {
+export default function ResultsJr() {
   const [editingMatch, setEditingMatch] = useState<Match | null>(null);
   const [user, setUser] = useState<string | null>(null);
   useEffect(() => {
@@ -86,24 +86,20 @@ const handleSave = async (
     { value: "grupoC", label: "Grupo C" },
     { value: "grupoD", label: "Grupo D" },
     { value: "grupoE", label: "Grupo E" },
-    { value: "grupoF", label: "Grupo F" },
-    { value: "octavos", label: "Octavos" },
     { value: "cuartos", label: "Cuartos" },
     { value: "semis", label: "Semifinal" },
     { value: "final", label: "Final" },
   ];
 
   const faseMap: Record<string, number> = {
-    grupoA: 1,
-    grupoB: 2,
-    grupoC: 3,
-    grupoD: 4,
-    grupoE: 5,
-    grupoF: 6,
-    octavos: 7,
-    cuartos: 8,
-    semis: 9,
-    final: 10,
+    grupoA: 15,
+    grupoB: 16,
+    grupoC: 17,
+    grupoD: 18,
+    grupoE: 19,
+    cuartos: 20,
+    semis: 21,
+    final: 22,
   };
   
   const [open, setOpen] = useState(false);

@@ -60,6 +60,10 @@ export default function Home() {
         {activeTab === "streaming" && <Streaming />}
         {activeTab === "budget" && <Budget />}
         {activeTab === "documents" && <Documents />}
+        {/* Submenú de Sub-16 */}
+        {activeTab.startsWith("under16") && (
+          <Under16 section={activeTab.replace("under16-", "")} />
+        )}
       </main>
 
       <footer className="footer">

@@ -314,6 +314,12 @@ main {
 
 .tabs-container {
   margin-bottom: var(--spacing-8);
+  position: relative; 
+  z-index: 10;      
+}
+
+.tab-item-wrapper {
+  position: relative;
 }
 
 .tabs-list {
@@ -328,7 +334,20 @@ main {
   padding: var(--spacing-2);
 }
 
+.tabsJr-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: var(--spacing-2);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-2);
+}
+
 .tab-trigger {
+  width: 100%; /* <-- ¡ESTA ES LA LÍNEA CLAVE! (Añadida) */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -342,7 +361,7 @@ main {
   font-weight: 500;
   font-size: 0.95rem;
   color: var(--jogo-black);
-  white-space: nowrap; /* evita wrap en móviles */
+  white-space: nowrap;
 }
 
 .tab-trigger:hover {
@@ -365,6 +384,68 @@ main {
 .tab-label {
   display: inline;
 }
+
+/* Submenú de Sub-16 */
+.submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: var(--spacing-2);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+              inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-2) 0;
+  width: 100%;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  align-items: center;
+}
+  
+.submenu-item {
+  display: flex;         
+  align-items: center;  
+  gap: var(--spacing-2); 
+  width: 90%;
+  padding: var(--spacing-2) var(--spacing-3);
+  background: transparent;
+  border: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--jogo-black);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border-radius: var(--radius);
+}
+
+/* Tus otros estilos están perfectos y no necesitan cambios */
+
+.submenu-item:hover {
+  background: rgba(27, 54, 187, 0.1);
+  transform: translateX(2px);
+}
+
+.submenu-item.active {
+  background: var(--jogo-blue-persa);
+  color: white;
+  box-shadow: 0 4px 10px rgba(27, 54, 187, 0.3);
+}
+
+.iconos_tab {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.2rem;
+  flex-shrink: 0; /* Opcional: Evita que el icono se encoja si el texto es largo */
+}
+
+.tab-label {
+  display: inline;
+}
+
 
 /* Cards */
 .jogo-card {
@@ -1012,6 +1093,37 @@ main {
   color: white;
 }
 
+.badge-editar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-1);
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius);
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease; /* 🔥 transición suave */
+}
+
+.badge-transparent {
+  background: transparent;
+  color: #62656f;
+  border: 1px solid transparent;
+}
+
+.icono-editar {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.25s ease; /* animación de movimiento */
+}
+
+
+.badge-transparent:hover .icono-editar {
+  transform: rotate(-10deg) scale(1.2); /* el icono gira y crece un poco */
+}
+
+
 .badge-gold {
   background: var(--yellow-600);
   color: white;
@@ -1375,8 +1487,9 @@ main {
 
 .match-status-results {
   display: flex;
-  justify-content: flex-start;
-  width: 100%; /* ocupa todo el ancho para que los badges no desplacen nada */   
+  justify-content: space-between; /* <-- ¡Este es el cambio! */
+  align-items: center;         /* Añade esto para alinear verticalmente */
+  width: 100%;
 }
 
 .score-value {
@@ -1616,6 +1729,8 @@ main {
   transform: scale(1.02);
 }
 
+
+
 /* Botón */
 .modal-form button {
   width: 30%;
@@ -1656,6 +1771,203 @@ main {
 .modal-content form button {
   margin-right: 0.5rem;
 }
+/*----- MODAL EDITAR -----*/
+/* --- ESTILOS DEL MODAL (Contenido principal) --- */
+.modal-content-edit {
+  width: 100%;
+  max-width: 500px;
+  background: white;
+  padding: 3.5rem 2rem;
+  border-radius: 2rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  text-align: center; /* Centra el H1 y H3 */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-content-edit h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem; /* Añadido espacio */
+}
+
+/* --- ESTE ES EL CONTENEDOR CLAVE --- */
+.modal-form-edit {
+  display: flex;
+  flex-direction: column; /* 1. FORZAR a que sea una columna */
+  align-items: stretch;    /* 2. CAMBIAR 'center' por 'stretch' */
+  gap: 1.5rem;             /* 3. Aumentar el espacio entre bloques */
+}
+
+/* --- Estilos para cada bloque de label (Goles + botones) --- */
+.modal-form-edit label {
+  display: block; /* 'block' está bien */
+  text-align: center; /* Centra el texto "Goles..." */
+  font-weight: bold;
+  color: var(--jogo-blue-persa);
+  /* Quita 'margin-top', el 'gap' del padre ya lo maneja */
+}
+
+/* --- Estilos para la fila de botones [ - ] [ 0 ] [ + ] --- */
+.input-with-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem; /* Aumenta el 'gap' para más espacio */
+  margin-top: 0.75rem; /* Espacio entre el texto y los botones */
+}
+
+.boton-sumar-1:hover, .boton-restar-1:hover, .boton-sumar-2:hover, .boton-restar-2:hover {
+  background: var(--jogo-yellow);
+  color: white;
+  transform: scale(1.1);
+}
+
+.input-with-buttons input {
+  width: 60px;
+  text-align: center;
+  padding: 0.75rem 0.5rem; /* Más padding vertical */
+  border-radius: 1rem;
+  border: 2px solid var(--jogo-blue-persa);
+  outline: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--jogo-blue-persa);
+  font-size: 1rem;
+}
+
+/* Oculta las flechas por defecto del input numérico */
+.input-with-buttons input::-webkit-outer-spin-button,
+.input-with-buttons input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.input-with-buttons input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.input-with-buttons button {
+  width: 40px;   /* Más grandes */
+  height: 40px;  /* Más grandes */
+  border-radius: 50%;
+  border: 2px solid var(--jogo-yellow);
+  background: transparent;
+  color: var(--jogo-yellow);
+  font-weight: bold;
+  font-size: 1.25rem; /* Fuente más grande */
+  cursor: pointer;
+  transition: 0.2s;
+  
+  /* Añadido para centrar el + y - */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+}
+
+.goal-input {
+  text-align: center;
+  font-weight: bold;
+  color: var(--jogo-blue-persa);
+}
+
+.estado-select {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  color: var(--jogo-blue-persa);
+}
+
+.estado-select label {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.estado-select select {
+  width: 65%;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 2px solid var(--jogo-blue-persa);
+  background: linear-gradient(145deg, #ffffff, #f0f3ff);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--jogo-blue-persa);
+  appearance: none; /* quita el estilo por defecto del navegador */
+  background-image: linear-gradient(145deg, #ffffff, #f0f3ff),
+    url("data:image/svg+xml;utf8,<svg fill='%23007BFF' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.estado-select select:hover {
+  background: linear-gradient(145deg, #f9fbff, #e6edff);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+}
+
+.estado-select select:focus {
+  outline: none;
+  border-color: var(--jogo-blue-persa);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+.estado-select select option {
+  background-color: #ffffff;
+  color: var(--jogo-blue-persa);
+  font-weight: 500;
+  padding: 10px;
+  background-color: #e8ecff;
+  color: var(--blue-600)
+}
+
+
+/* --- Contenedor para los botones de Cancelar/Guardar --- */
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* Estilos genéricos para los botones del modal */
+.modal-buttons button {
+  width: 120px; /* Ancho fijo para los botones */
+  padding: 0.8rem;
+  border-radius: 1rem;
+  border: 2px solid var(--jogo-yellow);
+  background: transparent;
+  color: var(--jogo-yellow);
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.modal-buttons button:hover {
+  background: linear-gradient(135deg, #1e3a8a, #3b82f6, #facc15);
+  transform: scale(1.03);
+  border: 2px solid transparent;
+  color: white;
+}
+
+/* Estilo específico para el botón primario (si tienes .btn-primary) */
+.modal-buttons .btn-primary {
+  background: var(--jogo-yellow);
+  color: var(--jogo-blue-persa, #fff); /* Color de texto para el primario */
+}
+
+.modal-buttons .btn-primary:hover {
+   background: linear-gradient(135deg, #1e3a8a, #3b82f6, #facc15);
+   color: white;
+}
+
+
+/* ----- Cards de gastos e ingresos -----*/
 
 .card-content-balance {
   padding: var(--spacing-6);
@@ -2369,6 +2681,11 @@ footer::before {
     font-size: 0.9rem;
     font-weight: 500;
     margin: 0;
+  }
+
+  .icono-editar{
+    width: 16px;
+    height: 16px; 
   }
 
   .stats-grid-results {

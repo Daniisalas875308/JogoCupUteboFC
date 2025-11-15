@@ -21,6 +21,12 @@ export const getPartidosPorDia = async (fecha /* 'YYYY-MM-DD' */) => {
   return res.json();
 };
 
+export const getPartidosPorDiaJunior = async (fecha /* 'YYYY-MM-DD' */) => {
+  const res = await fetch(`${API_URL}/partidos/por-dia-junior/${fecha}`);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+};
+
 export const getPartidosPorFase = async (faseId) => {
   const res = await fetch(`${API_URL}/partidos/por-fase/${faseId}`);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -45,4 +51,20 @@ export async function createEconomia(payload) {
   }
   return res.json();
 }
+
+export const updateResultadoPartido = async (id, goles_local, goles_visitante, estado) => {
+  const res = await fetch(`${API_URL}/partidos/resultado/${id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ goles_local, goles_visitante, estado }),
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(text || `HTTP ${res.status}`);
+  }
+
+  return res.json();
+};
+
 

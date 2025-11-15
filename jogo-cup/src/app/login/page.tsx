@@ -27,7 +27,7 @@ export default function LoginPage() {
     console.log("Recibo esto del login:", data);
 
     if (!res.ok) {
-      setError(data.error || 'Error de login');
+      setError('Usuario o clave incorrectos');
     } else {
       localStorage.setItem('token', data.token);
       localStorage.setItem('nombre', data.nombre);
