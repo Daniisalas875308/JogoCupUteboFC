@@ -74,6 +74,27 @@ const handleSave = async (
     }
   };
 
+  interface PartidoActualizado {
+    id: number;
+    goles_local: number;
+    goles_visitante: number;
+    estado: string;
+    fecha: string;
+    equipo_local: { nombre: string } | null;
+    equipo_visitante: { nombre: string } | null;
+  }
+
+  interface PartidoCreado {
+    tipo: "creado";
+    partido: PartidoActualizado; // obligatorio
+  }
+
+  interface PartidoEliminado {
+    tipo: "eliminado";
+    partidoId: number; // obligatorio
+  }
+
+  type PartidoCambio = PartidoCreado | PartidoEliminado;
 
   const [lastUpdate, setLastUpdate] = useState("--:--");
   const [selectedFase, setSelectedFase] = useState<keyof typeof resultsData>("grupoA");
@@ -135,7 +156,7 @@ const handleSave = async (
     const faseId = faseMap[selectedFase];
     socket.emit("suscribirse_fase", faseId);
 
-    socket.on("partido_actualizado", (data: any) => {
+    socket.on("partido_actualizado", (data: PartidoActualizado) => {
       console.log("⚽Partido actualizado:", data);
       setMatches((prev) =>
         prev.map((m) => (m.id === data.id ? { ...m, ...data } : m))
@@ -143,10 +164,14 @@ const handleSave = async (
       setLastUpdate(new Date().toLocaleTimeString());
     });
 
-    socket.on("partidos_cambio", (event: any) => {
-      if (event.tipo === "creado") setMatches((prev) => [...prev, event.partido]);
-      else if (event.tipo === "eliminado")
+    socket.on("partidos_cambio", (event: PartidoCambio) => {
+      if (event.tipo === "creado") {
+        // TypeScript sabe que 'partido' existe
+        setMatches((prev) => [...prev, event.partido]);
+      } else {
+        // TypeScript sabe que 'partidoId' existe
         setMatches((prev) => prev.filter((m) => m.id !== event.partidoId));
+      }
     });
 
     return () => {
