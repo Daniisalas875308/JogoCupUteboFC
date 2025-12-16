@@ -1,4 +1,4 @@
-import { ImageWithFallback } from "./figma/imageWithFallback";
+/*import { ImageWithFallback } from "./figma/imageWithFallback";
 
 interface Image {
   id: number;
@@ -33,8 +33,8 @@ export function InfiniteCarousel({ images, speed = 30 }: InfiniteCarouselProps) 
           </div>
         ))}
       </div>
-
-      {/* Gradientes laterales para efecto de fade */}
+*/
+      {/* Gradientes laterales para efecto de fade 
       <div className="absolute top-0 left-0 h-full w-32 bg-gradient-to-r from-gray-950 to-transparent pointer-events-none" />
       <div className="absolute top-0 right-0 h-full w-32 bg-gradient-to-l from-gray-950 to-transparent pointer-events-none" />
       
@@ -58,4 +58,4 @@ export function InfiniteCarousel({ images, speed = 30 }: InfiniteCarouselProps) 
       `}</style>
     </div>
   );
-}
+}*/}
