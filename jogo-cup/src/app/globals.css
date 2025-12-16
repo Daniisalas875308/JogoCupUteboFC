@@ -80,14 +80,14 @@ main {
 
 /* Container */
 .container {
-  width: clamp(80%, 70vw, 1600px);
+  width: clamp(90%, 70vw, 1600px);
   /*max-width: 1200px;*/
   margin: 0 auto;
   padding: 0 var(--spacing-6);
 }
 
 .container-header {
-  width: clamp(80%, 70vw, 1600px);
+  width: clamp(90%, 70vw, 1600px);
   flex-shrink: 0;
   margin: 0 auto;
   padding: 0 0;
@@ -2464,28 +2464,28 @@ footer::before {
 .logo-1 { height: 60px; }  /* activaSalud_logo */
 .logo-2 { height: 40px; }  /* aislamientos_logo */
 .logo-3 { height: 60px; }  /* alagodent_logo */
-.logo-4 { height: 80px; }  /* bolas_logo */
-.logo-5 { height: 80px; }  /* boxeo_logo */
-.logo-6 { height: 70px; }  /* casa_ariza_logo */
-.logo-7 { height: 70px; }  /* cintasa_logo */
-.logo-8 { height: 90px; }  /* comarca_logo */
-.logo-9 { height: 50px; }  /* davidFisio_logo */
-.logo-10 { height: 30px; }  /* fabrisem_logo */
-.logo-11 { height: 60px; }  /* fuentes_logo */
-.logo-12 { height: 40px; } /* guallar_logo */
-.logo-13 { height: 70px; } /* ina_logo */
-.logo-14 { height: 80px; } /* inmunolife_logo */
-.logo-15 { height: 70px; } /* jvc_logo */
-.logo-16 { height: 60px; } /* laPalmera_logo */
-.logo-17 { height: 70px; } /* montajes_logo */
-.logo-18 { height: 50px; } /* pasos_logo */
-.logo-19 { height: 70px; } /* pavimentos_logo_sinfondo */
-.logo-20 { height: 40px; } /* pulimasa_logo_mini */
-.logo-21 { height: 60px; } /* rodeni_logo */
-.logo-22 { height: 80px; } /* sc_logo */
-.logo-23 { height: 80px; } /* soriano_logo */
-.logo-24 { height: 60px; } /* zadisa_logo */
-
+.logo-4 { height: 60px; }  /* anyla_logo */
+.logo-5 { height: 80px; }  /* bolas_logo */
+.logo-6 { height: 80px; }  /* boxeo_logo */
+.logo-7 { height: 70px; }  /* casa_ariza_logo */
+.logo-8 { height: 70px; }  /* cintasa_logo */
+.logo-9 { height: 90px; }  /* comarca_logo */
+.logo-10 { height: 50px; }  /* davidFisio_logo */
+.logo-11 { height: 30px; }  /* fabrisem_logo */
+.logo-12 { height: 60px; }  /* fuentes_logo */
+.logo-13 { height: 40px; } /* guallar_logo */
+.logo-14 { height: 70px; } /* ina_logo */
+.logo-15 { height: 80px; } /* inmunolife_logo */
+.logo-16 { height: 70px; } /* jvc_logo */
+.logo-17 { height: 60px; } /* laPalmera_logo */
+.logo-18 { height: 70px; } /* montajes_logo */
+.logo-19 { height: 50px; } /* pasos_logo */
+.logo-20 { height: 70px; } /* pavimentos_logo_sinfondo */
+.logo-21 { height: 40px; } /* pulimasa_logo_mini */
+.logo-22 { height: 60px; } /* rodeni_logo */
+.logo-23 { height: 80px; } /* sc_logo */
+.logo-24 { height: 80px; } /* soriano_logo */
+.logo-25 { height: 60px; } /* zadisa_logo */
 @media (max-width: 768px) {
  /* Base móvil */
     .carousel-logo {
@@ -2507,27 +2507,28 @@ footer::before {
     .logo-1 { height: 60px !important; }  /* activaSalud_logo */
     .logo-2 { height: 40px !important; }  /* aislamientos_logo */
     .logo-3 { height: 50px !important; }  /* alagodent_logo */
-    .logo-4 { height: 70px !important; }  /* bolas_logo */
-    .logo-5 { height: 70px !important; }  /* boxeo_logo */
-    .logo-6 { height: 70px !important; }  /* casa_ariza_logo */
-    .logo-7 { height: 70px !important; }  /* cintasa_logo */
-    .logo-8 { height: 70px !important; }  /* comarca_logo */
-    .logo-9 { height: 50px !important; }  /* davidFisio_logo */
-    .logo-10 { height: 30px !important; }  /* fabrisem_logo */
-    .logo-11 { height: 60px !important; }  /* fuentes_logo */
-    .logo-12 { height: 30px !important; } /* guallar_logo */
-    .logo-13 { height: 60px !important; } /* ina_logo */
-    .logo-14 { height: 80px !important; } /* inmunolife_logo */
-    .logo-15 { height: 70px !important; } /* jvc_logo */
-    .logo-16 { height: 50px !important; } /* laPalmera_logo */
-    .logo-17 { height: 70px !important; } /* montajes_logo */
-    .logo-18 { height: 50px !important; } /* pasos_logo */
-    .logo-19 { height: 70px !important; } /* pavimentos_logo_sinfondo */
-    .logo-20 { height: 40px !important; } /* pulimasa_logo_mini */
-    .logo-21 { height: 50px !important; } /* rodeni_logo */
-    .logo-22 { height: 60px !important; } /* sc_logo */
-    .logo-23 { height: 80px !important; } /* soriano_logo */
-    .logo-24 { height: 50px !important; } /* zadisa_logo */
+    .logo-4 { height: 60px; }  /* anyla_logo */
+    .logo-5 { height: 70px !important; }  /* bolas_logo */
+    .logo-6 { height: 70px !important; }  /* boxeo_logo */
+    .logo-7 { height: 70px !important; }  /* casa_ariza_logo */
+    .logo-8 { height: 70px !important; }  /* cintasa_logo */
+    .logo-9 { height: 70px !important; }  /* comarca_logo */
+    .logo-10 { height: 50px !important; }  /* davidFisio_logo */
+    .logo-11 { height: 30px !important; }  /* fabrisem_logo */
+    .logo-12 { height: 60px !important; }  /* fuentes_logo */
+    .logo-13 { height: 30px !important; } /* guallar_logo */
+    .logo-14 { height: 60px !important; } /* ina_logo */
+    .logo-15 { height: 80px !important; } /* inmunolife_logo */
+    .logo-16 { height: 70px !important; } /* jvc_logo */
+    .logo-17 { height: 50px !important; } /* laPalmera_logo */
+    .logo-18 { height: 70px !important; } /* montajes_logo */
+    .logo-19 { height: 50px !important; } /* pasos_logo */
+    .logo-20 { height: 70px !important; } /* pavimentos_logo_sinfondo */
+    .logo-21 { height: 40px !important; } /* pulimasa_logo_mini */
+    .logo-22 { height: 50px !important; } /* rodeni_logo */
+    .logo-23 { height: 60px !important; } /* sc_logo */
+    .logo-24 { height: 80px !important; } /* soriano_logo */
+    .logo-25 { height: 50px !important; } /* zadisa_logo */
 
     /* Carrusel optimizado para móvil */
     .carousel-track {
@@ -3080,6 +3081,64 @@ footer::before {
     font-size: 0.75rem;
   }
 
+  /*----- MEDIA MODAL EDITAR -----*/
+  /* --- ESTILOS DEL MODAL (Contenido principal) --- */
+  .modal-content-edit {
+    width: 80%;
+    padding: 1.5rem 2rem;
+
+  }
+
+  .modal-content-edit h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem; /* Añadido espacio */
+  }
+
+  .modal-content-edit h3 {
+    margin-top: 0;
+    margin-bottom: 0.8rem; /* Añadido espacio */
+  }
+
+  /* --- ESTE ES EL CONTENEDOR CLAVE --- */
+  .modal-form-edit {
+    gap: 0.5rem;             /* 3. Aumentar el espacio entre bloques */
+  }
+
+  /* --- Estilos para la fila de botones [ - ] [ 0 ] [ + ] --- */
+.input-with-buttons {
+  gap: 1rem; /* Aumenta el 'gap' para más espacio */
+  margin-top: 0.75rem; /* Espacio entre el texto y los botones */
+}
+
+.input-with-buttons input {
+  width: 40px;
+  padding: 0.5rem 0.25rem; /* Más padding vertical */
+  border-radius: 1rem;
+  font-size: 1rem;
+}
+
+.input-with-buttons button {
+  width: 30px;   /* Más grandes */
+  height: 30px;  /* Más grandes */
+  border-radius: 50%;
+  font-size: 1rem; /* Fuente más grande */
+}
+
+/* Estilos genéricos para los botones del modal */
+.modal-buttons button {
+  width: 90px; /* Ancho fijo para los botones */
+  padding: 0.6rem;
+  border-radius: 1rem;
+  font-weight: normal;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.estado-select {
+  gap: 6px;
+}
+
   /* Botón */
   .modal-form button {
     width: 40%;
@@ -3295,25 +3354,56 @@ footer::before {
   }
 
   /* --- LOGOUT BUTTON --- */
-  .logout-button {
-    background: var(--red-600);
-    width: 90px;      
-    height: 35px;     
-    font-size: 0.65rem;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    color: white;
-    text-decoration: none;
+    .logout-button {
+      /* Flexbox para centrar y ordenar el contenido (texto/icono) */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px; /* Espacio entre el texto y el icono */
+
+    /* Estilo general: Fondo Rojo (peligro/alerta), Esquinas Redondeadas, Sombra */
+      background-color: #e53e3e; /* Rojo vibrante */
+      color: white;
+      border: none;
+      border-radius: 9999px; /* Píldora */
+      padding: 8px 16px; /* Relleno amplio para escritorio */
+      font-weight: 600;
+      cursor: pointer;
+      transition: 
+        background-color 0.2s ease-in-out, 
+      transform 0.1s ease,
+      box-shadow 0.2s ease-in-out;
+      /* Efecto de brillo o elevación */
+      box-shadow: 0 4px 15px rgba(229, 62, 62, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+      /* Aseguramos que el texto sea blanco y legible */
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Estilo del Icono */
+  .logout-icon {
+    font-size: 1.5rem; /* Ajuste del tamaño del icono */
+    /* No necesita color específico, hereda el color 'white' del botón */
   }
 
-  .logout-icon {
-    font-size: 18px;
-    font-weight: bold;
+  .logout-text {
+    /* Estilo del texto si es necesario */
+    white-space: nowrap; /* Previene que el texto salte de línea */
+  }
+
+  /* --- Adaptación para Móviles (Menos de 600px) --- */
+  @media (max-width: 600px) {
+  .logout-button {
+      /* Compacto: Padding igualado para hacerlo circular */
+      padding: 10px; 
+      width: 40px; 
+      height: 40px; 
+    /* No necesitamos justificación de contenido, ya que solo hay un elemento (el icono) */
+      gap: 0; 
+    }
+
+    .logout-icon {
+      font-size: 1.2rem; /* El icono puede ser ligeramente más pequeño */
+    }
   }
 
     /*media footer*/
