@@ -44,7 +44,7 @@ export default function Header() {
     <header className="jogo-header">
       <div className="background-particles"></div>
       <div className="container-header">
-        {isMobile ? (
+        {/*{isMobile ? (
           <div className="header-content">
             <div className="title-section">
               <h1 className="text-blue">JOGO CUP</h1>
@@ -52,7 +52,7 @@ export default function Header() {
             </div>
             <div className="logo-section">
               <div className="logo-container">
-                <img src="/logo-final-fondo.png" alt="JOGO CUP Logo" className="logo logo-glow" />
+                <img src="/logo_sin_fondo_edicion.png" alt="JOGO CUP Logo" className="logo logo-glow" />
               </div>
             </div>
             <div className="login-section">
@@ -80,18 +80,15 @@ export default function Header() {
               )}
             </div>
           </div>
-        ) : (
+        ) : (*/}
           <div className="header-content">
-            <div className="logo-section">
-              <div className="logo-container">
-                <img src="/logo-final-fondo.png" alt="JOGO CUP Logo" className="logo logo-glow" />
-              </div>
-              <div className="title-section">
-                <h1 className="gradient-text">JOGO CUP</h1>
-                <p className="subtitle"><strong>1ª Edición</strong></p>
-              </div>
+            <div className="left">
+              <img src="/logosPatros/comarca_logo.png" className="logo-comarca" />
             </div>
-            <div className="login-section">
+            <div className="center">
+                <img src="/logo-final-fondo.png" alt="JOGO CUP Logo" className="logo logo-glow" />
+            </div>
+            <div className="right">
               {user  ? ( 
                 <div className="login-link">
                   <button onClick={handleLogout} className="logout-button">
@@ -117,7 +114,7 @@ export default function Header() {
               )}
             </div>
           </div>
-        )}
+        {/*})}*/}
       </div>
     </header>
   );

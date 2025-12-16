@@ -135,13 +135,38 @@ main {
 }
 
 .header-content {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
+  width: 100%;
   gap: var(--spacing-4);
   padding: 0 var(--spacing-4);
 }
+
+.left, .right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+/* A la izquierda pegado */
+.left {
+  justify-content: flex-start;
+}
+
+/* A la derecha pegado */
+.right {
+  justify-content: flex-end;
+}
+
+/* El del medio siempre centrado */
+.center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 
 .logo-section {
   display: flex;
@@ -165,6 +190,12 @@ main {
   filter: drop-shadow(0 0 30px rgba(231, 202, 71, 0.8));
   animation: logoGlow 3s ease-in-out infinite alternate;
 }
+
+.logo-comarca {
+  height: 100px;
+  width: 100px;
+  object-fit: contain;
+} 
 
 @keyframes logoGlow {
   from { filter: drop-shadow(0 0 20px rgba(231, 202, 71, 0.6)); }
@@ -2376,6 +2407,181 @@ footer::before {
   animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Contenedor principal: define el ancho y oculta lo que se sale */
+.carousel-container {
+    width: 100%;
+    overflow: hidden;
+    background: transparent; /* O el color de fondo que desees */
+    padding: 10px 0;
+    position: relative;
+    /* Esto añade un degradado transparente a los lados para un efecto elegante */
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+/* La pista que se mueve: contiene todos los logos en fila */
+.carousel-track {
+    display: flex;
+    width: max-content; /* Se asegura de que quepan todos los logos en una línea */
+    gap: 3rem; /* Espacio entre logos */
+    animation: scroll 20s linear infinite; /* Ajusta '30s' para la velocidad */
+}
+
+/* Cada item individual */
+.carousel-slide {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+/* Estilo de la imagen */
+.carousel-slide img {
+    /*height: 60px; /* Altura fija para uniformidad */
+   /* width: auto;  /* El ancho se adapta al logo */
+    object-fit: contain; /* CRUCIAL: 'contain' evita que se recorten los logos */
+    filter: grayscale(100%); /* Opcional: logos en blanco y negro */
+    opacity: 0.7; /* Opcional: un poco transparentes */
+    transition: all 0.3s ease;
+    pointer-events: auto;
+    transform-origin: center;
+}
+
+/* Opcional: Efecto al pasar el ratón */
+.carousel-slide img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.carousel-logo {
+    height: 90px;      /* altura base desktop */
+    width: auto;
+    object-fit: contain;
+}
+
+.logo-0 { height: 60px; }  /* acnb_logo */
+.logo-1 { height: 60px; }  /* activaSalud_logo */
+.logo-2 { height: 40px; }  /* aislamientos_logo */
+.logo-3 { height: 60px; }  /* alagodent_logo */
+.logo-4 { height: 80px; }  /* bolas_logo */
+.logo-5 { height: 80px; }  /* boxeo_logo */
+.logo-6 { height: 70px; }  /* casa_ariza_logo */
+.logo-7 { height: 70px; }  /* cintasa_logo */
+.logo-8 { height: 90px; }  /* comarca_logo */
+.logo-9 { height: 50px; }  /* davidFisio_logo */
+.logo-10 { height: 30px; }  /* fabrisem_logo */
+.logo-11 { height: 60px; }  /* fuentes_logo */
+.logo-12 { height: 40px; } /* guallar_logo */
+.logo-13 { height: 70px; } /* ina_logo */
+.logo-14 { height: 80px; } /* inmunolife_logo */
+.logo-15 { height: 70px; } /* jvc_logo */
+.logo-16 { height: 60px; } /* laPalmera_logo */
+.logo-17 { height: 70px; } /* montajes_logo */
+.logo-18 { height: 50px; } /* pasos_logo */
+.logo-19 { height: 70px; } /* pavimentos_logo_sinfondo */
+.logo-20 { height: 40px; } /* pulimasa_logo_mini */
+.logo-21 { height: 60px; } /* rodeni_logo */
+.logo-22 { height: 80px; } /* sc_logo */
+.logo-23 { height: 80px; } /* soriano_logo */
+.logo-24 { height: 60px; } /* zadisa_logo */
+
+@media (max-width: 768px) {
+ /* Base móvil */
+    .carousel-logo {
+        height: 30px;
+    }
+
+    .carousel-container {
+        width: 100%;
+        overflow: hidden;
+        background: transparent; /* O el color de fondo que desees */
+        padding: 2px 0;
+        position: relative;
+        /* Esto añade un degradado transparente a los lados para un efecto elegante */
+        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    }
+
+    .logo-0 { height: 60px !important; }  /* acnb_logo */
+    .logo-1 { height: 60px !important; }  /* activaSalud_logo */
+    .logo-2 { height: 40px !important; }  /* aislamientos_logo */
+    .logo-3 { height: 50px !important; }  /* alagodent_logo */
+    .logo-4 { height: 70px !important; }  /* bolas_logo */
+    .logo-5 { height: 70px !important; }  /* boxeo_logo */
+    .logo-6 { height: 70px !important; }  /* casa_ariza_logo */
+    .logo-7 { height: 70px !important; }  /* cintasa_logo */
+    .logo-8 { height: 70px !important; }  /* comarca_logo */
+    .logo-9 { height: 50px !important; }  /* davidFisio_logo */
+    .logo-10 { height: 30px !important; }  /* fabrisem_logo */
+    .logo-11 { height: 60px !important; }  /* fuentes_logo */
+    .logo-12 { height: 30px !important; } /* guallar_logo */
+    .logo-13 { height: 60px !important; } /* ina_logo */
+    .logo-14 { height: 80px !important; } /* inmunolife_logo */
+    .logo-15 { height: 70px !important; } /* jvc_logo */
+    .logo-16 { height: 50px !important; } /* laPalmera_logo */
+    .logo-17 { height: 70px !important; } /* montajes_logo */
+    .logo-18 { height: 50px !important; } /* pasos_logo */
+    .logo-19 { height: 70px !important; } /* pavimentos_logo_sinfondo */
+    .logo-20 { height: 40px !important; } /* pulimasa_logo_mini */
+    .logo-21 { height: 50px !important; } /* rodeni_logo */
+    .logo-22 { height: 60px !important; } /* sc_logo */
+    .logo-23 { height: 80px !important; } /* soriano_logo */
+    .logo-24 { height: 50px !important; } /* zadisa_logo */
+
+    /* Carrusel optimizado para móvil */
+    .carousel-track {
+        gap: 2rem;
+        animation: scroll 22s linear infinite;
+    }
+
+    /* Mejor legibilidad en móvil */
+    .carousel-slide img {
+        opacity: 0.85;
+        filter: grayscale(60%);
+    }
+
+    .footer-separator {
+      width: 64%;            /* ancho de la línea */
+      height: 2px;             /* grosor */
+      background-color: rgba(255, 255, 255, 0.3);  /* color de la línea */
+      margin: 2px auto;       /* separación y centrado */
+      border-radius: 1px;      /* bordes redondeados opcional */
+    }
+}
+
+
+
+.footer-separator {
+  width: 64%;            /* ancho de la línea */
+  height: 2px;             /* grosor */
+  background-color: rgba(255, 255, 255, 0.3);  /* color de la línea */
+  margin: 30px auto;       /* separación y centrado */
+  border-radius: 1px;      /* bordes redondeados opcional */
+}
+
+
+
+/* LA MAGIA: Animación infinita */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-25%); 
+    }
+}
+
+/* Ajustes para móviles */
+@media (max-width: 768px) {
+    .carousel-track {
+        gap: 1.5rem;
+    }
+    .carousel-slide img {
+        height: 50px; /* Logos más pequeños en móvil */
+    }
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -3234,6 +3440,12 @@ footer::before {
   .logo {
     height: 90px;
     width: 90px;
+    object-fit: contain;
+  }
+
+  .logo-comarca {
+    height: 60px;
+    width: 60px;
     object-fit: contain;
   }
 
