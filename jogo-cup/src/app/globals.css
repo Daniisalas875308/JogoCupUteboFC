@@ -347,6 +347,7 @@ main {
   margin-bottom: var(--spacing-8);
   position: relative; 
   z-index: 10;      
+  overflow: visible;
 }
 
 .tab-item-wrapper {
@@ -434,14 +435,16 @@ main {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-2);
+  justify-content: center;
   align-items: center;
 }
   
 .submenu-item {
-  display: flex;         
-  align-items: center;  
-  gap: var(--spacing-2); 
-  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* centrar el contenido horizontalmente */
+  gap: var(--spacing-2);
+  width: 98%;
   padding: var(--spacing-2) var(--spacing-3);
   background: transparent;
   border: none;
@@ -452,6 +455,7 @@ main {
   transition: all 0.25s ease;
   border-radius: var(--radius);
 }
+
 
 /* Tus otros estilos están perfectos y no necesitan cambios */
 
@@ -1472,17 +1476,46 @@ main {
 
 .match-teams-live {
   display: flex;
-  align-items: center;         /* centra verticalmente */
-  justify-content: space-between; /* separa los elementos al máximo */
-  width: 100%;                 /* ocupa todo el ancho del contenedor */
-  padding: 0 16px;             /* un poquito de espacio a los lados */
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.team {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;                 /* 🔥 separación controlada */
+  max-width: 35%;
+}
+
+.team-local {
+  justify-content: flex-start;
+}
+
+.team-visitante {
+  justify-content: flex-end;
+}
+
+.team-logo {
+  width: 3.5em;               /* mismo tamaño que texto */
+  height: 3.5em;
+  object-fit: contain;     /* 🔑 clave */
+  border-radius: 50%;
+  background: transparent;      /* para escudos transparentes */
 }
 
 .team-name {
   font-size: 1.3rem;
   font-weight: 600;
-  max-width: 30%;              /* evita que los nombres se expandan demasiado */
-  text-align: center;          /* centra el texto si es más corto */
+  overflow: visible;        /* ❌ fuera hidden */
+  white-space: normal;      /* ❌ fuera nowrap */
+  text-overflow: unset;     /* ❌ fuera ellipsis */
+  hyphens: auto;            /* 🔑 pone guiones automáticos */
+  word-break: break-word;
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  line-height: 1.2;
 }
 
 .match-score {
@@ -1492,6 +1525,14 @@ main {
   padding: var(--spacing-1) var(--spacing-4);
   border-radius: var(--radius);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.vs-icon {
+    width: 3.5em;
+    height: 3.5em;
+    object-fit: cover;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .match-status {
@@ -1896,66 +1937,27 @@ main {
 
 .goal-input {
   text-align: center;
-  font-weight: bold;
+  font-weight: 500;
   color: var(--jogo-blue-persa);
 }
 
 .estado-select {
   display: flex;
   flex-direction: column;
-  gap: 8px;
   align-items: center;
-  text-align: center;
-  font-weight: bold;
-  color: var(--jogo-blue-persa);
+  gap: 10px;
 }
 
-.estado-select label {
-  font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.estado-select select {
-  width: 65%;
-  padding: 8px 14px;
-  border-radius: 10px;
-  border: 2px solid var(--jogo-blue-persa);
-  background: linear-gradient(145deg, #ffffff, #f0f3ff);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-  font-size: 1rem;
+.estado-select-label {
   font-weight: 500;
-  color: var(--jogo-blue-persa);
-  appearance: none; /* quita el estilo por defecto del navegador */
-  background-image: linear-gradient(145deg, #ffffff, #f0f3ff),
-    url("data:image/svg+xml;utf8,<svg fill='%23007BFF' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 16px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  margin: 0;
+  color: var(--jogo-blue-persa); /* o el color de tu texto */
 }
 
-.estado-select select:hover {
-  background: linear-gradient(145deg, #f9fbff, #e6edff);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+/* Si quieres que el dropdown del estado sea más compacto */
+.estado-toggle {
+  width: 150px; /* Ejemplo de un ancho más pequeño */
 }
-
-.estado-select select:focus {
-  outline: none;
-  border-color: var(--jogo-blue-persa);
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
-}
-.estado-select select option {
-  background-color: #ffffff;
-  color: var(--jogo-blue-persa);
-  font-weight: 500;
-  padding: 10px;
-  background-color: #e8ecff;
-  color: var(--blue-600)
-}
-
 
 /* --- Contenedor para los botones de Cancelar/Guardar --- */
 .modal-buttons {
@@ -2815,6 +2817,8 @@ footer::before {
     margin: 0;
   }
 
+  
+
   /*media activities*/
   .activity-card {
     padding: var(--spacing-1);
@@ -2864,7 +2868,7 @@ footer::before {
   .dropdown-toggle {
     padding: 10px 10px;
     font-size: 0.75rem;
-    font-weight: 600;
+    font-weight: 500;
     min-width: 150px;
   }
 
@@ -2941,26 +2945,50 @@ footer::before {
 
   .match-teams-live {
     display: flex;
-    align-items: center;         /* centra verticalmente */
-    justify-content: space-between; /* separa los elementos al máximo */
-    width: 100%;                 /* ocupa todo el ancho del contenedor */
-    padding: 0 10px;             /* un poquito de espacio a los lados */
+    align-items: center;
+    justify-content: center; /* Cambiamos de space-between a center */
+    width: 100%;
+    padding: 0 5px;
+    gap: 5px; /* Controla la separación mínima entre equipos y marcador */
+  }
+
+  .team {
+    flex: 1; /* Esto hace que los equipos ocupen todo el espacio disponible */
+    max-width: none; /* Eliminamos el límite del 35% */
+    display: flex;
+    align-items: center;
+    min-width: 0; /* Importante para que el texto respete el truncado/ajuste */
+  }
+
+  .team-local {
+    justify-content: flex-start; /* Logo a la izquierda */
+    text-align: left;
+  }
+
+  .team-visitante {
+    justify-content: flex-end; /* Logo a la derecha */
+    text-align: right;
   }
 
   .team-name {
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     font-weight: 600;
-    max-width: 36%;              /* evita que los nombres se expandan demasiado */
-    text-align: center;          /* centra el texto si es más corto */
+    flex: 1; /* Permite que el nombre tome el espacio sobrante */
+    white-space: normal; /* Permite que el nombre baje de línea si es muy largo */
+    word-break: break-word;
+    line-height: 1.1;
+  }
+
+  .team-logo {
+    width: 1.8em; /* Ajustado ligeramente para móvil */
+    height: 1.8em;
+    flex-shrink: 0; /* Evita que el escudo se aplaste */
   }
 
   .match-score {
-    flex-shrink: 0;              /* el marcador no se achica */
-    text-align: center;
-    background: white;
-    padding: var(--spacing-1) var(--spacing-2);
-    border-radius: var(--radius);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0; 
+    padding: 4px 8px; /* Reducimos padding para ganar espacio */
+    min-width: 50px; /* Asegura que el marcador no se vea muy comprimido */
   }
 
   .match-info-results {
@@ -3716,6 +3744,10 @@ footer::before {
     overflow-x: auto;
     scroll-behavior: smooth;
     grid-template-columns: 1fr;
+  }
+
+  .submenu {
+    position: static;
   }
   
   .tab-trigger {

@@ -59,31 +59,30 @@ export default function Tabs({ activeTab, setActiveTab }: TabsProps) {
               <span className="iconos_tab">{tab.icon}</span>
               <span className="tab-label">{tab.label}</span>
             </button>
-
-            {/* Submenú para Sub-16 */}
-            {tab.id === "under16" && openSubmenu && (
-              <div className="submenu">
-                {under16Submenu.map(sub => {
-                  const isActive = activeTab === sub.id;
-                  return (
-                    <button
-                      key={sub.id}
-                      className={`submenu-item ${isActive ? "active" : ""}`}
-                      onClick={() => {
-                        setActiveTab(sub.id);
-                        setOpenSubmenu(true);
-                      }}
-                    >
-                      <span className="iconos_tab_submenu">{sub.icon}</span>
-                      <span className="tab-label_submenu">{sub.label}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            )}
           </div>
         ))}
       </div>
+
+      {openSubmenu && (
+        <div className="submenu">
+          {under16Submenu.map(sub => {
+            const isActive = activeTab === sub.id;
+            return (
+              <button
+                key={sub.id}
+                className={`submenu-item ${isActive ? "active" : ""}`}
+                onClick={() => {
+                  setActiveTab(sub.id);
+                  setOpenSubmenu(true);
+                }}
+              >
+                <span className="iconos_tab_submenu">{sub.icon}</span>
+                <span className="tab-label_submenu">{sub.label}</span>
+              </button>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

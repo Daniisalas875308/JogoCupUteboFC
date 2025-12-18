@@ -44,9 +44,9 @@ export default function Overview() {
         <div className="jogo-card stats-card">
             <div className="stat-item">
               <div className="stat-info">
-                <p className="stat-icon">💸</p>
+                <p className="stat-icon">🏎️</p>
                 <p className="stat-label">Primer premio</p>
-                <p className="stat-value text-green">2.500€</p>
+                <p className="stat-value text-green">Experiencia Karts</p>
                 <p className="stat-detail">para el campeón</p>
               </div>
             </div>
@@ -71,7 +71,7 @@ export default function Overview() {
                   <p className="prize-desc">Fase de Grupos (12 partidos)</p>
                 </div>
               </div>
-              <div className="time-bold">17:00 - 23:00</div>
+              <div className="time-bold">09:00 - 23:00</div>
             </div>
 
             <div className="prize-item prize-blue">
@@ -81,7 +81,7 @@ export default function Overview() {
                   <p className="prize-desc">Fase de Grupos (24 partidos)</p>
                 </div>
               </div>
-              <div className="time-bold">10:00 - 22:00</div>
+              <div className="time-bold">09:00 - 20:00</div>
             </div>
 
             <div className="prize-item prize-blue">
@@ -91,7 +91,7 @@ export default function Overview() {
                   <p className="prize-desc">Fase Final (15 partidos)</p>
                 </div>
               </div>
-              <div className="time-bold">10:00 - 18:00</div>
+              <div className="time-bold">09:00 - 18:00</div>
             </div>
           </div>
         </div>

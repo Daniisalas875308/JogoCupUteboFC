@@ -81,7 +81,7 @@ export default function Overview() {
                   <p className="prize-desc">Fase de Grupos (24 partidos)</p>
                 </div>
               </div>
-              <div className="time-bold">10:00 - 22:00</div>
+              <div className="time-bold">09:00 - 23:00</div>
             </div>
 
             <div className="prize-item prize-blue">
@@ -91,7 +91,7 @@ export default function Overview() {
                   <p className="prize-desc">Fase Final (15 partidos)</p>
                 </div>
               </div>
-              <div className="time-bold">10:00 - 18:00</div>
+              <div className="time-bold">09:00 - 21:00</div>
             </div>
           </div>
         </div>

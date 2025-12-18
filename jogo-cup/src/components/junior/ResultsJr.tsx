@@ -273,7 +273,7 @@ type PartidoCambio = PartidoCreado | PartidoEliminado;
               </div>
               <div className="stat-info-results">
                 <p className="stat-label-results"><strong>Partidos Jugados</strong></p>
-                <p className="stat-value-results jogo-primary">8</p>
+                <p className="stat-value-results jogo-primary">0</p>
               </div>
             </div>
           </div>
@@ -287,7 +287,7 @@ type PartidoCambio = PartidoCreado | PartidoEliminado;
               </div>
               <div className="stat-info-results">
                 <p className="stat-label-results"><strong>Goles Marcados</strong></p>
-                <p className="stat-value-results text-green">24</p>
+                <p className="stat-value-results text-green">0</p>
               </div>
             </div>
           </div>
@@ -301,7 +301,7 @@ type PartidoCambio = PartidoCreado | PartidoEliminado;
               </div>
               <div className="stat-info-results">
                 <p className="stat-label-results"><strong>Actividades</strong></p>
-                <p className="stat-value-results jogo-accent">2</p>
+                <p className="stat-value-results jogo-accent">3</p>
               </div>
             </div>
           </div>

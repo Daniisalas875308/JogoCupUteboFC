@@ -51,8 +51,8 @@ export default function Results() {
     goles_visitante: number;
     fecha: string;
     estado: string;
-    equipo_local: { nombre: string } | null;
-    equipo_visitante: { nombre: string } | null;
+    equipo_local: { nombre: string, logo_url: string } | null;
+    equipo_visitante: { nombre: string, logo_url: string } | null;
   }
 
   const handleEdit = (match: Match) => setEditingMatch(match);
@@ -80,8 +80,8 @@ const handleSave = async (
     goles_visitante: number;
     estado: string;
     fecha: string;
-    equipo_local: { nombre: string } | null;
-    equipo_visitante: { nombre: string } | null;
+    equipo_local: { nombre: string, logo_url: string } | null;
+    equipo_visitante: { nombre: string, logo_url: string } | null;
   }
 
   interface PartidoCreado {
@@ -227,7 +227,6 @@ const handleSave = async (
         <div className="card-content">
           {loading && <p>Cargando partidos...</p>}
           {!loading && matches.length === 0 && <p>No hay resultados en esta fase todavía.</p>}
-
           {!loading && matches.map((match, idx) => (
             <div className={`${match.estado}-match`} key={idx}>
               <div className="match-info-results">
@@ -245,13 +244,26 @@ const handleSave = async (
                 </div>
                 <div className="match-centrado">
                   <div className="match-teams-live">
-                    <div className="team-name">{(match.equipo_local?.nombre ?? "Equipo 1")}</div>
+                    <div className="team team-local">
+                      {/*<img src={match.equipo_local?.logo_url} alt={match.equipo_local?.logo_url } className="team-logo" />*/}
+                       {/*<img src="/equiposEscudos/jogo_escudo.png" alt="escudo visitante" className="team-logo" />*/}
+                      <div className="team-name">
+                        {match.equipo_local?.nombre ?? "Equipo 1"}
+                      </div>
+                    </div>
+
                     <div className="match-score">
                       <div className="score-value jogo-primary">
                         {match.goles_local} - {match.goles_visitante}
                       </div>
                     </div>
-                    <div className="team-name">{(match.equipo_visitante?.nombre ?? "Equipo 2")}</div>
+
+                    <div className="team team-visitante">
+                      <div className="team-name">
+                        {match.equipo_visitante?.nombre ?? "Equipo 2"}
+                      </div>
+                      {/*<img src="/equiposEscudos/chirin_escudo.png" alt="escudo visitante" className="team-logo" />*/}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -277,7 +289,7 @@ const handleSave = async (
               </div>
               <div className="stat-info-results">
                 <p className="stat-label-results"><strong>Partidos Jugados</strong></p>
-                <p className="stat-value-results jogo-primary">8</p>
+                <p className="stat-value-results jogo-primary">0</p>
               </div>
             </div>
           </div>
@@ -291,7 +303,7 @@ const handleSave = async (
               </div>
               <div className="stat-info-results">
                 <p className="stat-label-results"><strong>Goles Marcados</strong></p>
-                <p className="stat-value-results text-green">24</p>
+                <p className="stat-value-results text-green">0</p>
               </div>
             </div>
           </div>
@@ -305,7 +317,7 @@ const handleSave = async (
               </div>
               <div className="stat-info-results">
                 <p className="stat-label-results"><strong>Actividades</strong></p>
-                <p className="stat-value-results jogo-accent">2</p>
+                <p className="stat-value-results jogo-accent">3</p>
               </div>
             </div>
           </div>

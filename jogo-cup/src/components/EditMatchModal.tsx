@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { FiChevronDown } from "react-icons/fi"; // Asegúrate de importar este icono
 // Primero define el tipo Match (o impórtalo si ya existe en otro archivo)
 interface Match {
   id: number;
@@ -10,6 +10,12 @@ interface Match {
   equipo_local: { nombre: string } | null;
   equipo_visitante: { nombre: string } | null;
 }
+
+const matchStates = [
+ { value: 'pendiente', label: 'Por jugar' },
+ { value: 'live', label: 'En juego' },
+ { value: 'fin', label: 'Finalizado' },
+];
 
 // Define los tipos de props
 interface EditMatchModalProps {
@@ -23,7 +29,7 @@ export default function EditMatchModal({ match, onClose, onSave }: EditMatchModa
   const [localGoals, setLocalGoals] = useState<number>(match.goles_local);
   const [awayGoals, setAwayGoals] = useState<number>(match.goles_visitante);
   const [matchState, setMatchState] = useState<string>(match.estado);
-
+  const [isStateDropdownOpen, setIsStateDropdownOpen] = useState(false);
   const handleSave = () => {
     onSave(match.id, localGoals, awayGoals, matchState);
     onClose();
@@ -64,12 +70,32 @@ export default function EditMatchModal({ match, onClose, onSave }: EditMatchModa
             </div>
           </div>
           <div className="estado-select">
-            <p>Estado del partido:</p>
-            <select value={matchState} onChange={(e) => setMatchState(e.target.value)}>
-              <option value="pendiente">Por jugar</option>
-              <option value="live">En juego</option>
-              <option value="fin">Finalizado</option>
-            </select>
+            <p className="estado-select-label">Estado del partido:</p>
+              <div className="dropdown-container">
+                <button 
+                  className="dropdown-toggle estado-toggle" 
+                  onClick={() => setIsStateDropdownOpen(!isStateDropdownOpen)}
+                  >
+                    {matchStates.find((s) => s.value === matchState)?.label || "Selecciona Estado"}
+                    <FiChevronDown className={`chevron ${isStateDropdownOpen ? "open" : ""}`} />
+                  </button>
+                  {isStateDropdownOpen && (
+                    <ul className="dropdown-menu estado-menu">
+                      {matchStates.map((state) => (
+                        <li
+                          key={state.value}
+                          className={`dropdown-item ${state.value === matchState ? "active" : ""}`}
+                          onClick={() => {
+                          setMatchState(state.value); 
+                          setIsStateDropdownOpen(false);
+                          }}
+                          >
+                          {state.label}
+                        </li>
+                      ))}
+                  </ul>
+                  )}
+            </div>
           </div>
 
           <div className="modal-buttons">
