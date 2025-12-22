@@ -9,6 +9,7 @@ interface Group {
 interface Equipo {
   nombre: string;
   puntos: number;
+  logo_url?: string;
 }
 
 export default function Groups() {
@@ -90,13 +91,26 @@ export default function Groups() {
               <div className="teams-list">
                 {group.teams.map((team, idx) => (
                   <div className="team-item" key={idx}>
-                    <span className="team-name-groups">{team.nombre}</span>
-                    <div className="team-stats-grups">
-                    <span className="team-points-grups">{team.puntos} pts</span>
-                    <div className="team-indicator-grups"></div>
+
+                    {/* IZQUIERDA: escudo + nombre */}
+                    <div className="team-left">
+                      {team.logo_url && (
+                        <img
+                          src={team.logo_url}
+                          alt={team.nombre}
+                          className="team-logo-grupos"
+                        />
+                      )}
+                      <span className="team-name-groups">{team.nombre}</span>
+                    </div>
+
+                    {/* DERECHA: puntos */}
+                    <div className="team-right">
+                      <span className="team-points-grups">{team.puntos} pts</span>
+                    </div>
+
                   </div>
-                </div>
-              ))}
+                ))}
               </div>
               <div className="group-footer">
                 <p className="group-note">Clasifican: 2 primeros + 4 mejores terceros</p>

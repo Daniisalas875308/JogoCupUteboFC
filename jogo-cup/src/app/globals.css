@@ -913,25 +913,45 @@ main {
   font-weight: 600;
 }
 
-.team-name-groups {
-    color: #000000;
-    max-width: 75%;
-}
-
 .card-group, .match-group {
   margin-left: var(--spacing-1);
 }
 
 .team-item {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* separa izquierda y derecha */
   align-items: center;
   padding: var(--spacing-2);
   background: #f9fafb;
   border-radius: var(--radius);
   margin-bottom: var(--spacing-2);
-  transition: background-color 0.3s ease;
 }
+
+.team-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;              /* separación escudo-nombre */
+  min-width: 0;             /* CLAVE para que el texto no rompa */
+  flex: 1;                  /* ocupa todo el espacio disponible */
+  margin-right: 0.75rem; /* 👈 separación mínima con los puntos */  
+}
+
+.team-name-groups {
+  color: #000;
+  font-weight: 500;
+  white-space: normal;      /* permite salto si hace falta */
+  word-break: break-word;
+}
+
+.team-right {
+  flex-shrink: 0;           /* siempre pegados a la derecha */
+}
+
+.team-points-grups {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 
 .team-stats {
   display: flex;
@@ -1474,10 +1494,19 @@ main {
   50% { opacity: 0.7; }
 }
 
-.match-teams-live {
+
+.match-centrado {
+  width: 100%;
   display: flex;
+  flex-direction: column;
+  align-items: center; /* centra horizontalmente todo */
+  gap: 8px;
+}
+
+.match-teams-live {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* ⬅️ clave */
   align-items: center;
-  justify-content: space-between;
   width: 100%;
 }
 
@@ -1485,20 +1514,27 @@ main {
   display: inline-flex;
   align-items: center;
   gap: 0.4em;                 /* 🔥 separación controlada */
-  max-width: 35%;
 }
 
 .team-local {
-  justify-content: flex-start;
+  justify-self: start;
 }
 
 .team-visitante {
-  justify-content: flex-end;
+  justify-self: end;
 }
 
 .team-logo {
   width: 3.5em;               /* mismo tamaño que texto */
   height: 3.5em;
+  object-fit: contain;     /* 🔑 clave */
+  border-radius: 50%;
+  background: transparent;      /* para escudos transparentes */
+}
+
+.team-logo-grupos{
+  width: 3em;               /* mismo tamaño que texto */
+  height: 3em;
   object-fit: contain;     /* 🔑 clave */
   border-radius: 50%;
   background: transparent;      /* para escudos transparentes */
@@ -1549,13 +1585,6 @@ main {
   gap: 8px;
 }
 
-.match-centrado {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* centra horizontalmente todo */
-  gap: 8px;
-}
 
 .match-status-results {
   display: flex;
@@ -2480,7 +2509,7 @@ footer::before {
 .logo-15 { height: 80px; } /* inmunolife_logo */
 .logo-16 { height: 70px; } /* jvc_logo */
 .logo-17 { height: 60px; } /* laPalmera_logo */
-.logo-18 { height: 70px; } /* montajes_logo */
+.logo-18 { height: 40px; } /* montajes_logo */
 .logo-19 { height: 50px; } /* pasos_logo */
 .logo-20 { height: 70px; } /* pavimentos_logo_sinfondo */
 .logo-21 { height: 40px; } /* pulimasa_logo_mini */
@@ -2488,6 +2517,7 @@ footer::before {
 .logo-23 { height: 80px; } /* sc_logo */
 .logo-24 { height: 80px; } /* soriano_logo */
 .logo-25 { height: 60px; } /* zadisa_logo */
+
 @media (max-width: 768px) {
  /* Base móvil */
     .carousel-logo {
@@ -2523,7 +2553,7 @@ footer::before {
     .logo-15 { height: 80px !important; } /* inmunolife_logo */
     .logo-16 { height: 70px !important; } /* jvc_logo */
     .logo-17 { height: 50px !important; } /* laPalmera_logo */
-    .logo-18 { height: 70px !important; } /* montajes_logo */
+    .logo-18 { height: 40px !important; } /* montajes_logo */
     .logo-19 { height: 50px !important; } /* pasos_logo */
     .logo-20 { height: 70px !important; } /* pavimentos_logo_sinfondo */
     .logo-21 { height: 40px !important; } /* pulimasa_logo_mini */
@@ -2979,7 +3009,7 @@ footer::before {
     line-height: 1.1;
   }
 
-  .team-logo {
+  .team-logo, .team-logo-grupos {
     width: 1.8em; /* Ajustado ligeramente para móvil */
     height: 1.8em;
     flex-shrink: 0; /* Evita que el escudo se aplaste */

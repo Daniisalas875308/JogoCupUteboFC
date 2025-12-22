@@ -245,8 +245,9 @@ const handleSave = async (
                 <div className="match-centrado">
                   <div className="match-teams-live">
                     <div className="team team-local">
-                      {/*<img src={match.equipo_local?.logo_url} alt={match.equipo_local?.logo_url } className="team-logo" />*/}
-                       {/*<img src="/equiposEscudos/jogo_escudo.png" alt="escudo visitante" className="team-logo" />*/}
+                      {match.equipo_local?.logo_url && (
+                        <img src={match.equipo_local?.logo_url} alt={match.equipo_local?.logo_url } className="team-logo" />
+                      )}
                       <div className="team-name">
                         {match.equipo_local?.nombre ?? "Equipo 1"}
                       </div>
@@ -262,7 +263,9 @@ const handleSave = async (
                       <div className="team-name">
                         {match.equipo_visitante?.nombre ?? "Equipo 2"}
                       </div>
-                      {/*<img src="/equiposEscudos/chirin_escudo.png" alt="escudo visitante" className="team-logo" />*/}
+                      {match.equipo_visitante?.logo_url && (
+                        <img src={match.equipo_visitante?.logo_url} alt={match.equipo_visitante?.logo_url } className="team-logo" />
+                      )}
                     </div>
                   </div>
                 </div>
