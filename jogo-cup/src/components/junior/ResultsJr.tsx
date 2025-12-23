@@ -103,23 +103,20 @@ type PartidoCambio = PartidoCreado | PartidoEliminado;
   const fases = [
     { value: "grupoA", label: "Grupo A" },
     { value: "grupoB", label: "Grupo B" },
-    { value: "grupoC", label: "Grupo C" },
-    { value: "grupoD", label: "Grupo D" },
-    { value: "grupoE", label: "Grupo E" },
-    { value: "cuartos", label: "Cuartos" },
-    { value: "semis", label: "Semifinal" },
-    { value: "final", label: "Final" },
+    { value: "semisA", label: "Semis Oro" },
+    { value: "semisB", label: "Semis Plata" },
+    { value: "finalB", label: "Final Plata" },
+    { value: "finalA", label: "Final Oro" },
   ];
 
   const faseMap: Record<string, number> = {
     grupoA: 15,
     grupoB: 16,
     grupoC: 17,
-    grupoD: 18,
-    grupoE: 19,
-    cuartos: 20,
-    semis: 21,
-    final: 22,
+    semisA: 20,
+    semisB: 21,
+    finalB: 22,
+    finalA: 23,
   };
   
   const [open, setOpen] = useState(false);

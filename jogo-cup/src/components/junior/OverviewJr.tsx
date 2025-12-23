@@ -122,7 +122,7 @@ export default function Overview() {
                   <p className="prize-desc">Segundo lugar</p>
                 </div>
               </div>
-              <div className="prize-amount">1000€</div>
+              
             </div>
 
             <div className="prize-item prize-bronze">
@@ -132,7 +132,6 @@ export default function Overview() {
                   <p className="prize-desc">Tercer y cuarto lugar</p>
                 </div>
               </div>
-              <div className="time-bold-bby">Inscripción gratuita 2ª edición</div>
             </div>
           </div>
         </div>
