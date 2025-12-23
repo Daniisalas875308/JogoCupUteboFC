@@ -62,8 +62,9 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>JOGO CUP - Dashboard del Torneo</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>JogoCup - Torneo fútbol 7 - Utbeo, Zaragoza</title>
+        <meta name="description" content="JogoCup organiza torneos de fútbol 7 en Utbeo, Zaragoza. No es solo fútbol, también es diversión, comida y fiestas. Vamos a hacer Utebo más grande" />
+        <meta name="keywords" content="JogoCup, fútbol 7, torneos fútbol, Utbeo, Zaragoza" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
       </Head>
