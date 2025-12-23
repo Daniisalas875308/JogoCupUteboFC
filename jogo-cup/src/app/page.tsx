@@ -42,7 +42,8 @@ const LOGOS = [
   {src: "/logosPatros/rodeni_logo.webp"},
   {src: "/logosPatros/sc_logo.png"},
   {src: "/logosPatros/soriano_logo.png"},
-  {src: "/logosPatros/zadisa_logo.png"}
+  {src: "/logosPatros/zadisa_logo.png"},
+  {src: "/logosPatros/posada_logo.png"}
 ];
 
 export default function Home() {

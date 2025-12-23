@@ -2517,6 +2517,7 @@ footer::before {
 .logo-23 { height: 80px; } /* sc_logo */
 .logo-24 { height: 80px; } /* soriano_logo */
 .logo-25 { height: 60px; } /* zadisa_logo */
+.logo-26 { height: 60px; } /* posada_logo */
 
 @media (max-width: 768px) {
  /* Base móvil */
