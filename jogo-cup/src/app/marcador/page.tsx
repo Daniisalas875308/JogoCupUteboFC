@@ -40,6 +40,7 @@ interface Match {
   goles_local: number;
   goles_visitante: number;
   estado: string;
+  fase_id: { id: number; nombre: string };
   equipo_local: { nombre: string; logo_url: string } | null;
   equipo_visitante: { nombre: string; logo_url: string } | null;
 }
@@ -73,7 +74,7 @@ export default function Marcador() {
     const socket = connectSocket();
     socket.emit("join_marcador");
     // ESCUCHAR EL CAMBIO DE PARTIDOS
-    socket.on("cambiar_partidos_marcador", (nuevosPartidos: any[]) => {
+    socket.on("cambiar_partidos_marcador", (nuevosPartidos: Match[]) => {
       console.log("Recibidos nuevos partidos para el marcador:", nuevosPartidos);
       if (nuevosPartidos.length > 0) {
         const nuevaFaseId = nuevosPartidos[0].fase_id.id;
@@ -100,7 +101,7 @@ export default function Marcador() {
     });
 
     // Escuchar actualizaciones de goles (tu lógica actual)
-    socket.on("partido_actualizado", (data: any) => {
+    socket.on("partido_actualizado", (data: Match) => {
       setMatches((prev) =>
         prev.map((m) => (m.id === data.id ? { ...m, ...data } : m))
       );
