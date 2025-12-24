@@ -2471,8 +2471,8 @@ footer::before {
     /*height: 60px; /* Altura fija para uniformidad */
    /* width: auto;  /* El ancho se adapta al logo */
     object-fit: contain; /* CRUCIAL: 'contain' evita que se recorten los logos */
-    filter: grayscale(100%); /* Opcional: logos en blanco y negro */
-    opacity: 0.7; /* Opcional: un poco transparentes */
+    /*filter: grayscale(100%); /* Opcional: logos en blanco y negro */
+    /*opacity: 0.7; /* Opcional: un poco transparentes */
     transition: all 0.3s ease;
     pointer-events: auto;
     transform-origin: center;
@@ -2518,6 +2518,36 @@ footer::before {
 .logo-24 { height: 80px; } /* soriano_logo */
 .logo-25 { height: 60px; } /* zadisa_logo */
 .logo-26 { height: 60px; } /* posada_logo */
+
+
+.logoMar-0 { height: 60px; }  /* acnb_logo */
+.logoMar-1 { height: 60px; }  /* activaSalud_logo */
+.logoMar-2 { height: 40px; }  /* aislamientos_logo */
+.logoMar-3 { height: 60px; }  /* alagodent_logo */
+.logoMar-4 { height: 60px; }  /* anyla_logo */
+.logoMar-5 { height: 80px; }  /* bolas_logo */
+.logoMar-6 { height: 80px; }  /* boxeo_logo */
+.logoMar-7 { height: 70px; }  /* casa_ariza_logo */
+.logoMar-8 { height: 70px; }  /* cintasa_logo */
+.logoMar-9 { height: 90px; }  /* comarca_logo */
+.logoMar-10 { height: 50px; }  /* davidFisio_logo */
+.logoMar-11 { height: 30px; }  /* fabrisem_logo */
+.logoMar-12 { height: 60px; }  /* fuentes_logo */
+.logoMar-13 { height: 40px; } /* guallar_logo */
+.logoMar-14 { height: 70px; } /* ina_logo */
+.logoMar-15 { height: 80px; } /* inmunolife_logo */
+.logoMar-16 { height: 70px; } /* jvc_logo */
+.logoMar-17 { height: 60px; } /* laPalmera_logo */
+.logoMar-18 { height: 40px; } /* montajes_logo */
+.logoMar-19 { height: 50px; } /* pasos_logo */
+.logoMar-20 { height: 70px; } /* pavimentos_logo_sinfondo */
+.logoMar-21 { height: 40px; } /* pulimasa_logo_mini */
+.logoMar-22 { height: 60px; } /* rodeni_logo */
+.logoMar-23 { height: 80px; } /* sc_logo */
+.logoMar-24 { height: 80px; } /* soriano_logo */
+.logoMar-25 { height: 60px; } /* zadisa_logo */
+.logoMar-26 { height: 60px; } /* posada_logo */
+
 
 @media (max-width: 768px) {
  /* Base móvil */
