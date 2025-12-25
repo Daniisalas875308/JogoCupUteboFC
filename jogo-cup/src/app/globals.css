@@ -2089,6 +2089,77 @@ main {
   color: var(--green-600)
 }
 
+/* --- ESTILOS ÚNICOS PARA EL ACCESO AL MARCADOR --- */
+
+.jc-hub-wrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding: 40px 20px;
+  flex-wrap: wrap;
+}
+
+.jc-hub-button {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+  text-decoration: none;
+  color: #1a202c;
+  width: 100%;
+  max-width: 350px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.jc-hub-button:hover {
+  border-color: #3b82f6;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.jc-hub-icon-box {
+  background: #eff6ff;
+  color: #3b82f6;
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.jc-hub-text-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.jc-hub-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 0;
+  color: #1e293b;
+}
+
+.jc-hub-description {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin: 4px 0 0 0;
+}
+
+/* Responsivo para móviles */
+@media (max-width: 600px) {
+  .jc-hub-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 .blue-card {
   background: linear-gradient(to right, rgba(34, 78, 197, 0.1), rgba(37, 99, 235, 0.05));
   border-radius: var(--radius);
@@ -2520,33 +2591,33 @@ footer::before {
 .logo-26 { height: 60px; } /* posada_logo */
 
 
-.logoMar-0 { height: 60px; }  /* acnb_logo */
-.logoMar-1 { height: 60px; }  /* activaSalud_logo */
-.logoMar-2 { height: 40px; }  /* aislamientos_logo */
-.logoMar-3 { height: 60px; }  /* alagodent_logo */
-.logoMar-4 { height: 60px; }  /* anyla_logo */
-.logoMar-5 { height: 80px; }  /* bolas_logo */
-.logoMar-6 { height: 80px; }  /* boxeo_logo */
-.logoMar-7 { height: 70px; }  /* casa_ariza_logo */
-.logoMar-8 { height: 70px; }  /* cintasa_logo */
-.logoMar-9 { height: 90px; }  /* comarca_logo */
-.logoMar-10 { height: 50px; }  /* davidFisio_logo */
-.logoMar-11 { height: 30px; }  /* fabrisem_logo */
-.logoMar-12 { height: 60px; }  /* fuentes_logo */
-.logoMar-13 { height: 40px; } /* guallar_logo */
-.logoMar-14 { height: 70px; } /* ina_logo */
-.logoMar-15 { height: 80px; } /* inmunolife_logo */
-.logoMar-16 { height: 70px; } /* jvc_logo */
-.logoMar-17 { height: 60px; } /* laPalmera_logo */
-.logoMar-18 { height: 40px; } /* montajes_logo */
-.logoMar-19 { height: 50px; } /* pasos_logo */
-.logoMar-20 { height: 70px; } /* pavimentos_logo_sinfondo */
-.logoMar-21 { height: 40px; } /* pulimasa_logo_mini */
-.logoMar-22 { height: 60px; } /* rodeni_logo */
-.logoMar-23 { height: 80px; } /* sc_logo */
-.logoMar-24 { height: 80px; } /* soriano_logo */
-.logoMar-25 { height: 60px; } /* zadisa_logo */
-.logoMar-26 { height: 60px; } /* posada_logo */
+.logoMar-0 { height: 100px; }  /* acnb_logo */
+.logoMar-1 { height: 100px; }  /* activaSalud_logo */
+.logoMar-2 { height: 80px; }  /* aislamientos_logo */
+.logoMar-3 { height: 100px; }  /* alagodent_logo */
+.logoMar-4 { height: 100px; }  /* anyla_logo */
+.logoMar-5 { height: 120px; }  /* bolas_logo */
+.logoMar-6 { height: 120px; }  /* boxeo_logo */
+.logoMar-7 { height: 110px; }  /* casa_ariza_logo */
+.logoMar-8 { height: 110px; }  /* cintasa_logo */
+.logoMar-9 { height: 130px; }  /* comarca_logo */
+.logoMar-10 { height: 90px; }  /* davidFisio_logo */
+.logoMar-11 { height: 70px; }  /* fabrisem_logo */
+.logoMar-12 { height: 100px; }  /* fuentes_logo */
+.logoMar-13 { height: 80px; } /* guallar_logo */
+.logoMar-14 { height: 110px; } /* ina_logo */
+.logoMar-15 { height: 120px; } /* inmunolife_logo */
+.logoMar-16 { height: 110px; } /* jvc_logo */
+.logoMar-17 { height: 100px; } /* laPalmera_logo */
+.logoMar-18 { height: 80px; } /* montajes_logo */
+.logoMar-19 { height: 90px; } /* pasos_logo */
+.logoMar-20 { height: 110px; } /* pavimentos_logo_sinfondo */
+.logoMar-21 { height: 100px; } /* pulimasa_logo_mini */
+.logoMar-22 { height: 100px; } /* rodeni_logo */
+.logoMar-23 { height: 120px; } /* sc_logo */
+.logoMar-24 { height: 120px; } /* soriano_logo */
+.logoMar-25 { height: 100px; } /* zadisa_logo */
+.logoMar-26 { height: 100px; } /* posada_logo */
 
 
 @media (max-width: 768px) {

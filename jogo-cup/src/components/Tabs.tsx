@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from "react";
-import { FaCalendar, FaTrophy, FaAward, FaUserCheck, FaVideo, FaEuroSign } from "react-icons/fa";
+import { FaCalendar, FaTrophy, FaAward, FaUserCheck, FaVideo, FaEuroSign, FaClock  } from "react-icons/fa";
 import { FaUsers, FaBolt } from "react-icons/fa6";
 
 interface TabsProps {
@@ -26,11 +26,12 @@ export default function Tabs({ activeTab, setActiveTab }: TabsProps) {
     { id: "results", label: "Resultados", icon: <FaAward /> },
     { id: "under16", label: "Sub-16", icon: <FaUserCheck /> },
     { id: "streaming", label: "En Vivo", icon: <FaVideo /> },
-    { id: "budget", label: "Economía", icon: <FaEuroSign /> },
+    { id: "gestionMarcador", label: "Marcador", icon: <FaClock /> },
+    /*{ id: "budget", label: "Economía", icon: <FaEuroSign /> },*/
     /*{ id: "documents", label: "Documentos", icon: <FaNewspaper /> },*/
   ];
 
-  const restrictedTabs = ['budget', 'documents'];
+  const restrictedTabs = ['budget', 'documents', 'gestionMarcador'];
   const visibleTabs = tabs.filter(tab => !restrictedTabs.includes(tab.id) || isLoggedIn);
 
   const under16Submenu = [

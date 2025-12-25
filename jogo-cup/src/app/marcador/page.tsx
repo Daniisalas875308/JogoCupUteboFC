@@ -6,7 +6,7 @@ import { getPartidosPorFase } from "../../components/api";
 import styles from './marcador.module.css';
 
 const LOGOS = [
-  {src: "/logosPatros/acnb_logo.png"},
+  {src: "/logosPatros/acnb_logo_letras.png"},
   {src: "/logosPatros/activaSalud_logo.png"},
   {src: "/logosPatros/aislamientos_logo.png"},
   {src: "/logosPatros/alagodent_logo.png"},
@@ -16,7 +16,7 @@ const LOGOS = [
   {src: "/logosPatros/casa_ariza_logo.png"},
   {src: "/logosPatros/cintasa_logo.png"},
   {src: "/logosPatros/comarca_logo.png"},
-  {src: "/logosPatros/davidFisio_logo.png"},
+  {src: "/logosPatros/david_logo_fondo.png"},
   {src: "/logosPatros/fabrisem_logo.png"},
   {src: "/logosPatros/fuentes_logo.png"},
   {src: "/logosPatros/guallar_logo.png"},
@@ -27,7 +27,7 @@ const LOGOS = [
   {src: "/logosPatros/montajes_logo.png"},
   {src: "/logosPatros/pasos_logo.png"},
   {src: "/logosPatros/pavimentos_logo_sinfondo.png"},
-  {src: "/logosPatros/pulimasa_logo_mini.png"},
+  {src: "/logosPatros/pulimasa_logo_negro.png"},
   {src: "/logosPatros/rodeni_logo.webp"},
   {src: "/logosPatros/sc_logo.png"},
   {src: "/logosPatros/soriano_logo.png"},
@@ -148,22 +148,21 @@ export default function Marcador() {
 
   return (
     <div className={styles['scoreboard-container']}>
-      <header className={styles['sb-header']}>
+     { /* <header className={styles['sb-header']}>
         <div className="carousel-container">
           <div className="carousel-track">
             {[...LOGOS, ...LOGOS, ...LOGOS, ...LOGOS].map((src, index) => (
               <div className="carousel-slide" key={index}>
-               { /*<img src={src.src} alt={`Sponsor ${index}`} style={{ height: src.height}} />*/}
                 <img
                   src={src.src}
                   alt={`Sponsor ${index}`}
-                  className={`carousel-logo logo-${index % LOGOS.length}`}
+                  className={`carousel-logo logoMar-${index % LOGOS.length}`}
                 />
               </div>
             ))}
           </div>
         </div>
-      </header>
+      </header>*/}
 
       <main className={styles['sb-main']}>
         {/* Partido 1 */}
@@ -190,15 +189,14 @@ export default function Marcador() {
       </main>
 
       <footer className={styles['sb-footer']}>
-        <div className="carousel-container">
-          <div className="carousel-track">
+        <div className={styles['carousel-container']}>
+          <div className={styles['carousel-track']}>
             {[...LOGOS, ...LOGOS, ...LOGOS, ...LOGOS].map((src, index) => (
-              <div className="carousel-slide" key={index}>
-               { /*<img src={src.src} alt={`Sponsor ${index}`} style={{ height: src.height}} />*/}
+              <div className={styles['carousel-slide']} key={index}>
                 <img
                   src={src.src}
                   alt={`Sponsor ${index}`}
-                  className={`carousel-logo logo-${index % LOGOS.length}`}
+                  className={`carousel-logo logoMar-${index % LOGOS.length}`}
                 />
               </div>
             ))}

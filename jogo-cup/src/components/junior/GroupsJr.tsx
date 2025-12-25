@@ -39,9 +39,9 @@ export default function GroupsJr() {
         // 🚀 traer dos grupos (faseId=1 y faseId=2)
         const grupo1: EquiposFase[] = await getEquiposPorGrupo(15);
         const grupo2: EquiposFase[] = await getEquiposPorGrupo(16);
-        const grupo3: EquiposFase[] = await getEquiposPorGrupo(17);
+        /*const grupo3: EquiposFase[] = await getEquiposPorGrupo(17);
         const grupo4: EquiposFase[] = await getEquiposPorGrupo(18);
-        const grupo5: EquiposFase[] = await getEquiposPorGrupo(19);
+        const grupo5: EquiposFase[] = await getEquiposPorGrupo(19);*/
 
         setGroups([
           { name: "Grupo 1", teams: grupo1.flatMap(g => g.equipos) },
@@ -49,7 +49,7 @@ export default function GroupsJr() {
             name: "Grupo 2",
             teams: grupo2.flatMap(g => g.equipos),
           },
-          {
+          /*{
             name: "Grupo 3",
             teams: grupo3.flatMap(g => g.equipos),
           },
@@ -60,7 +60,7 @@ export default function GroupsJr() {
           {
             name: "Grupo 5",
             teams: grupo5.flatMap(g => g.equipos),
-          },
+          },*/
         ]);
       } catch (err) {
         console.error("Error cargando grupos:", err);

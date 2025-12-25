@@ -13,29 +13,31 @@
 /* Header y Footer con alturas fijas */
 .sb-header {
   height: 14vh;
-  background: linear-gradient(135deg, 
+  /*background: linear-gradient(135deg, 
     rgba(27, 54, 187, 0.95) 0%, 
     rgba(37, 99, 235, 0.9) 20%, 
     rgba(80, 197, 214, 0.85) 40%, 
     rgba(6, 182, 212, 0.9) 60%, 
     rgba(231, 202, 71, 0.95) 80%, 
-    rgba(251, 191, 36, 0.95) 100%);  backdrop-filter: blur(20px);
+    rgba(251, 191, 36, 0.95) 100%);  backdrop-filter: blur(20px);*/
+  background-color: #f0f0f0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 40px;
+  padding: 0 80px;
   border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .sb-footer {
-  height: 14vh;
-  background: linear-gradient(135deg, 
+  height: 18vh;
+  /*background: linear-gradient(135deg, 
     rgba(27, 54, 187, 0.95) 0%, 
     rgba(37, 99, 235, 0.9) 20%, 
     rgba(80, 197, 214, 0.85) 40%, 
     rgba(6, 182, 212, 0.9) 60%, 
     rgba(231, 202, 71, 0.95) 80%, 
-    rgba(251, 191, 36, 0.95) 100%);  backdrop-filter: blur(20px);
+    rgba(251, 191, 36, 0.95) 100%);  backdrop-filter: blur(20px);*/
+  background-color: #f0f0f0;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -95,7 +97,7 @@
 }
 
 .sbTeamName {
-  font-size: 2rem; /* Ajustado para que no choque */
+  font-size: 2.2rem; /* Ajustado para que no choque */
   font-weight: 800;
   text-transform: uppercase;
   text-align: center;
@@ -104,8 +106,8 @@
 }
 
 .sbLogoBig {
-  width: 130px;
-  height: 130px;
+  width: 250px;
+  height: 250px;
   object-fit: contain;
   filter: drop-shadow(0 10px 15px rgba(0,0,0,0.4));
 }
@@ -120,25 +122,25 @@
 
 .sbScoreBox {
   /*background: rgba(255, 255, 255, 0.15);*/
-background: transparent;
+  background: transparent;
   backdrop-filter: blur(10px);
   padding: 20px 40px;
   border-radius: 25px;
   display: flex;
   align-items: center;
   gap: 25px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  /*border: 1px solid rgba(255, 255, 255, 0.2);*/
 }
 
 .sbScore {
-  font-size: 6rem;
+  font-size: 10rem;
   font-weight: 900;
   min-width: 80px;
   text-align: center;
 }
 
 .sbDash {
-  font-size: 4rem;
+  font-size: 8rem;
   opacity: 0.6;
 }
 
@@ -150,10 +152,10 @@ background: transparent;
   transform: translate(-50%, -50%);
   background: white;
   color: black;
-  padding: 8px 25px;
+  padding: 12px 40px;
   border-radius: 50px;
   font-weight: 700;
-  font-size: 1.8rem;
+  font-size: 5.5rem;
   z-index: 20;
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
   transition: transform 0.2s ease, background-color 0.2s ease;
@@ -180,4 +182,67 @@ background: transparent;
 @keyframes moveTicker {
   0% { transform: translateX(100%); }
   100% { transform: translateX(-100%); }
+}
+
+/* Contenedor principal: define el ancho y oculta lo que se sale */
+.carousel-container {
+    width: 100%;
+    overflow: hidden;
+    background: transparent; /* O el color de fondo que desees */
+    padding: 10px 0;
+    position: relative;
+    /* Esto añade un degradado transparente a los lados para un efecto elegante */
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+/* La pista que se mueve: contiene todos los logos en fila */
+.carousel-track {
+    display: flex;
+    width: max-content; /* Se asegura de que quepan todos los logos en una línea */
+    gap: 3rem; /* Espacio entre logos */
+    animation: scroll 35s linear infinite; /* Ajusta '30s' para la velocidad */
+}
+
+/* Cada item individual */
+.carousel-slide {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+/* Estilo de la imagen */
+.carousel-slide img {
+    /*height: 60px; /* Altura fija para uniformidad */
+   /* width: auto;  /* El ancho se adapta al logo */
+    object-fit: contain; /* CRUCIAL: 'contain' evita que se recorten los logos */
+    /*filter: grayscale(100%); /* Opcional: logos en blanco y negro */
+    /*opacity: 0.7; /* Opcional: un poco transparentes */
+    transition: all 0.3s ease;
+    pointer-events: auto;
+    transform-origin: center;
+}
+
+/* Opcional: Efecto al pasar el ratón */
+.carousel-slide img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.carousel-logo {
+    height: 90px;      /* altura base desktop */
+    width: auto;
+    object-fit: contain;
+}
+
+/* LA MAGIA: Animación infinita */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-25%); 
+    }
 }

@@ -15,6 +15,7 @@ import Under16 from "../components/Under16";
 import Streaming from "../components/Streaming";
 import Budget from "../components/Budget";
 import Documents from "../components/Documents";
+import GestionMarcador from "../components/gestionMarcador";
 
 const LOGOS = [
   {src: "/logosPatros/acnb_logo.png"},
@@ -81,6 +82,7 @@ export default function Home() {
         {activeTab === "under16" && <Under16 />}
         {activeTab === "streaming" && <Streaming />}
         {activeTab === "budget" && <Budget />}
+        {activeTab === "gestionMarcador" && <GestionMarcador />}
         {activeTab === "documents" && <Documents />}
         {activeTab.startsWith("under16") && (
           <Under16 section={activeTab.replace("under16-", "")} />
