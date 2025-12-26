@@ -73,65 +73,53 @@ export default function Marcador() {
   useEffect(() => {
     const socket = connectSocket();
     socket.emit("join_marcador");
-    // ESCUCHAR EL CAMBIO DE PARTIDOS
-    socket.on("cambiar_partidos_marcador", (nuevosPartidos: Match[]) => {
-      console.log("Recibidos nuevos partidos para el marcador:", nuevosPartidos);
-      if (nuevosPartidos.length > 0) {
-        const nuevaFaseId = nuevosPartidos[0].fase_id.id;
-        if (nuevaFaseId !== faseId) {
-          setFaseId(nuevaFaseId);
-        }
-        // Si ya estábamos suscritos a una fase diferente, nos desuscribimos
-        if (faseActualRef.current && faseActualRef.current !== nuevaFaseId) {
-          socket.emit("desuscribirse_fase", faseActualRef.current);
-        }
 
-        // Nos suscribimos a la nueva fase para recibir los goles en vivo
-        if (nuevaFaseId) {
-          socket.emit("suscribirse_fase", nuevaFaseId);
-          faseActualRef.current = nuevaFaseId;
+    const actualizarMarcadorDesdeBD = async () => {
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/marcador`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data: Match[] = await res.json();
+        console.log("Partidos cargados:", data); // 👈 para debug
+        setMatches(data);
+
+        if (data.length > 0) {
+          const nuevaFaseId = data[0].fase_id.id;
+          if (faseActualRef.current !== nuevaFaseId) {
+            if (faseActualRef.current) socket.emit("desuscribirse_fase", faseActualRef.current);
+            console.log("Suscribiéndose a fase:", nuevaFaseId); // 👈 para debug
+            socket.emit("suscribirse_fase", nuevaFaseId);
+            faseActualRef.current = nuevaFaseId;
+            setFaseId(nuevaFaseId);
+          }
         }
+      } catch (err) {
+        console.error("Error cargando marcador desde BD:", err);
       }
+    };
 
-      setMatches(nuevosPartidos);
-      
-      // OPCIONAL: Reiniciar el tiempo al cambiar de partidos
-      setSegundos(0);
-      setCorriendo(false);
-    });
+    // Cargar inicialmente
+    actualizarMarcadorDesdeBD();
 
     // Escuchar actualizaciones de goles (tu lógica actual)
     socket.on("partido_actualizado", (data: Match) => {
+      console.log("Partido actualizado recibido por socket:", data); // 👈 para debug
       setMatches((prev) =>
         prev.map((m) => (m.id === data.id ? { ...m, ...data } : m))
       );
     });
 
+    // Escuchar actualizaciones por socket
+    socket.on("cambiar_partidos_marcador", () => {
+      actualizarMarcadorDesdeBD();
+    });
+
     return () => {
-      if (faseActualRef.current) {
-        socket.emit("desuscribirse_fase", faseActualRef.current);
-      }
+      if (faseActualRef.current) socket.emit("desuscribirse_fase", faseActualRef.current);
       socket.off("cambiar_partidos_marcador");
-      socket.off("partido_actualizado");
     };
   }, []);
 
-  useEffect(() => {
-    const socket = connectSocket();
-    console.log("Suscribiéndose a la fase actual del marcador:", faseId);
-    socket.emit("suscribirse_fase", faseId);
 
-    socket.on("partido_actualizado", (data: Match) => {
-      setMatches((prev) =>
-        prev.map((m) => (m.id === data.id ? { ...m, ...data } : m))
-      );
-    });
-
-    return () => {
-      socket.emit("desuscribirse_fase", faseId);
-      socket.off("partido_actualizado");
-    };
-  }, [matches]);
 
   // Función para formatear segundos a 00:00
   const formatearTiempo = (totalSegundos: number) => {
@@ -148,21 +136,6 @@ export default function Marcador() {
 
   return (
     <div className={styles['scoreboard-container']}>
-     { /* <header className={styles['sb-header']}>
-        <div className="carousel-container">
-          <div className="carousel-track">
-            {[...LOGOS, ...LOGOS, ...LOGOS, ...LOGOS].map((src, index) => (
-              <div className="carousel-slide" key={index}>
-                <img
-                  src={src.src}
-                  alt={`Sponsor ${index}`}
-                  className={`carousel-logo logoMar-${index % LOGOS.length}`}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </header>*/}
 
       <main className={styles['sb-main']}>
         {/* Partido 1 */}

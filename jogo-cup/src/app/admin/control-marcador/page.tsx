@@ -70,15 +70,35 @@ export default function AdminMarcador() {
     }
   };
 
-  const enviarAlMarcador = () => {
+  const enviarAlMarcador = async () => {
     if (seleccionados.length === 0) return;
 
-    const socket = connectSocket();
-    // Enviamos los objetos completos de los partidos por el socket
-    socket.emit("cambiar_partidos_marcador", seleccionados);
-    
-    setMensaje("¡Marcador actualizado!");
-    setTimeout(() => setMensaje(""), 3000);
+    try {
+      // 1️⃣ Guardar en BD
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/marcador`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          partidos: seleccionados.map(p => p.id)
+        })
+      });
+
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(text || "Error guardando marcador");
+      }
+
+      // 2️⃣ Emitir por socket
+      const socket = connectSocket();
+      socket.emit("cambiar_partidos_marcador", seleccionados);
+
+      setMensaje("¡Marcador actualizado!");
+      setTimeout(() => setMensaje(""), 3000);
+    } catch (err) {
+      console.error("Error enviando al marcador:", err);
+      setMensaje("Error al actualizar el marcador");
+      setTimeout(() => setMensaje(""), 3000);
+    }
   };
 
   return (
