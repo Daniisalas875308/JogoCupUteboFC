@@ -10,7 +10,7 @@ const LOGOS = [
   {src: "/logosPatros/activaSalud_logo.png"},
   {src: "/logosPatros/aislamientos_logo.png"},
   {src: "/logosPatros/alagodent_logo.png"},
-  {src: "/logosPatros/anyla_logo.png"},
+  {src: "/logosPatros/anyla_logo_rojo.png"},
   {src: "/logosPatros/bolas_logo.png"},
   {src: "/logosPatros/boxeo_logo.png"},
   {src: "/logosPatros/casa_ariza_logo.png"},
