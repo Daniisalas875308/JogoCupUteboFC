@@ -2,10 +2,13 @@ import Link from 'next/link';
 import { FaTv, FaCogs } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import { connectSocket } from '../socket'; // Ajusta la ruta según tu proyecto
+import { io, Socket } from "socket.io-client";
+
 
 export default function GestionMarcador() {
   const [corriendo, setCorriendo] = useState(false);
-  const [socket, setSocket] = useState<any>(null);
+  const [socket, setSocket] = useState<Socket | null>(null);
+
 
   // Conectamos al socket al montar
   useEffect(() => {
