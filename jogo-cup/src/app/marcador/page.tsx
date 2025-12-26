@@ -81,7 +81,7 @@ export default function Marcador() {
         const data: Match[] = await res.json();
         console.log("Partidos cargados:", data); // 👈 para debug
         setMatches(data);
-
+        setSegundos(0); // Reiniciar el cronómetro al cargar nuevos partidos
         if (data.length > 0) {
           const nuevaFaseId = data[0].fase_id.id;
           if (faseActualRef.current !== nuevaFaseId) {
@@ -111,6 +111,11 @@ export default function Marcador() {
     // Escuchar actualizaciones por socket
     socket.on("cambiar_partidos_marcador", () => {
       actualizarMarcadorDesdeBD();
+    });
+
+    // Escuchar cambios globales del cronómetro
+    socket.on("cronometro_cambiar_estado_global", ({ corriendo: estado }) => {
+      setCorriendo(estado);
     });
 
     return () => {
