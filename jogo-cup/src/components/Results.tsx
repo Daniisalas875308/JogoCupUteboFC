@@ -6,7 +6,7 @@ import { FaTrophy } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa6";
 import { IoIosFootball } from "react-icons/io";
 import { IoFootball } from "react-icons/io5";
-import { getPartidosPorFase, updateResultadoPartido } from "./api";
+import { getPartidosPorFase, updateResultadoPartido, actualizarPuntosEquipos } from "./api";
 import { MdEdit } from "react-icons/md";
 import { Pencil } from "lucide-react";
 import EditMatchModal from "../components/EditMatchModal";
@@ -57,6 +57,12 @@ export default function Results() {
 
   const handleEdit = (match: Match) => setEditingMatch(match);
 
+const calcularPuntos = (golesLocal: number, golesVisitante: number) => {
+  if (golesLocal > golesVisitante) return [3, 0]; // Local gana
+  if (golesLocal < golesVisitante) return [0, 3]; // Visitante gana
+  return [1, 1]; // Empate
+};
+
 
 const handleSave = async (
     id: number,
@@ -69,6 +75,15 @@ const handleSave = async (
       // Llamamos a la función del servicio que ya usa API_URL
       await updateResultadoPartido(id, golesLocal, golesVisitante, estado);
       // No hace falta refreshResults(), el WebSocket actualizará la UI automáticamente
+      if (estado === "fin") {
+        const [puntosLocal, puntosVisitante] = calcularPuntos(golesLocal, golesVisitante);
+        console.log(`Puntos asignados - Local: ${puntosLocal}, Visitante: ${puntosVisitante}`);
+
+        await actualizarPuntosEquipos(id, puntosLocal, puntosVisitante);
+
+        // Aquí más adelante haremos la llamada al backend para actualizar los puntos
+      }
+
     } catch (err) {
       console.error("Error al actualizar partido:", err);
     }

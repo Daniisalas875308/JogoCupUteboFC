@@ -46,28 +46,32 @@ export default function Groups() {
         const grupo6: EquiposFase[] = await getEquiposPorGrupo(6);
 
         setGroups([
-          { name: "Grupo 1", teams: grupo1.flatMap(g => g.equipos) },
-          {
-            name: "Grupo 2",
-            teams: grupo2.flatMap(g => g.equipos),
-          },
-          {
-            name: "Grupo 3",
-            teams: grupo3.flatMap(g => g.equipos),
-          },
-          {
-            name: "Grupo 4",
-            teams: grupo4.flatMap(g => g.equipos),
-          },
-          {
-            name: "Grupo 5",
-            teams: grupo5.flatMap(g => g.equipos),
-          },
-          {
-            name: "Grupo 6",
-            teams: grupo6.flatMap(g => g.equipos),
-          },
-        ]);
+        { 
+          name: "Grupo 1", 
+          teams: grupo1.flatMap(g => g.equipos).sort((a, b) => b.puntos - a.puntos) 
+        },
+        { 
+          name: "Grupo 2", 
+          teams: grupo2.flatMap(g => g.equipos).sort((a, b) => b.puntos - a.puntos) 
+        },
+        { 
+          name: "Grupo 3", 
+          teams: grupo3.flatMap(g => g.equipos).sort((a, b) => b.puntos - a.puntos) 
+        },
+        { 
+          name: "Grupo 4", 
+          teams: grupo4.flatMap(g => g.equipos).sort((a, b) => b.puntos - a.puntos) 
+        },
+        { 
+          name: "Grupo 5", 
+          teams: grupo5.flatMap(g => g.equipos).sort((a, b) => b.puntos - a.puntos) 
+        },
+        { 
+          name: "Grupo 6", 
+          teams: grupo6.flatMap(g => g.equipos).sort((a, b) => b.puntos - a.puntos) 
+        },
+      ]);
+
       } catch (err) {
         console.error("Error cargando grupos:", err);
       }

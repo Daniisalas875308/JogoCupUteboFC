@@ -67,4 +67,21 @@ export const updateResultadoPartido = async (id, goles_local, goles_visitante, e
   return res.json();
 };
 
+export const actualizarPuntosEquipos = async (partidoId, puntosLocal, puntosVisitante) => {
+  console.log(`Actualizando puntos para partido ${partidoId}: Local ${puntosLocal}, Visitante ${puntosVisitante}`);
+  const res = await fetch(`${API_URL}/equipos/actualizar-puntos`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ partidoId, puntosLocal, puntosVisitante }),
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(text || `HTTP ${res.status}`);
+  }
+
+  return res.json();
+};
+
+
 
