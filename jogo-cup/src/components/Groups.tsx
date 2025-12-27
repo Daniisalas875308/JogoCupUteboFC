@@ -48,27 +48,39 @@ export default function Groups() {
         setGroups([
         { 
           name: "Grupo 1", 
-          teams: grupo1.flatMap(g => g.equipos).sort((a, b) => b.puntos - a.puntos) 
+          teams: grupo1
+            .flatMap(g => g.equipos)
+            .sort((a, b) => b.puntos !== a.puntos ? b.puntos - a.puntos : a.nombre.localeCompare(b.nombre))
         },
         { 
           name: "Grupo 2", 
-          teams: grupo2.flatMap(g => g.equipos).sort((a, b) => b.puntos - a.puntos) 
+          teams: grupo2
+            .flatMap(g => g.equipos)
+            .sort((a, b) => b.puntos !== a.puntos ? b.puntos - a.puntos : a.nombre.localeCompare(b.nombre))
         },
         { 
           name: "Grupo 3", 
-          teams: grupo3.flatMap(g => g.equipos).sort((a, b) => b.puntos - a.puntos) 
+          teams: grupo3
+            .flatMap(g => g.equipos)
+            .sort((a, b) => b.puntos !== a.puntos ? b.puntos - a.puntos : a.nombre.localeCompare(b.nombre)) 
         },
         { 
           name: "Grupo 4", 
-          teams: grupo4.flatMap(g => g.equipos).sort((a, b) => b.puntos - a.puntos) 
+          teams: grupo4
+            .flatMap(g => g.equipos)
+            .sort((a, b) => b.puntos !== a.puntos ? b.puntos - a.puntos : a.nombre.localeCompare(b.nombre)) 
         },
         { 
           name: "Grupo 5", 
-          teams: grupo5.flatMap(g => g.equipos).sort((a, b) => b.puntos - a.puntos) 
+          teams: grupo5
+          .flatMap(g => g.equipos)
+          .sort((a, b) => b.puntos !== a.puntos ? b.puntos - a.puntos : a.nombre.localeCompare(b.nombre)) 
         },
         { 
           name: "Grupo 6", 
-          teams: grupo6.flatMap(g => g.equipos).sort((a, b) => b.puntos - a.puntos) 
+          teams: grupo6
+            .flatMap(g => g.equipos)
+            .sort((a, b) => b.puntos !== a.puntos ? b.puntos - a.puntos : a.nombre.localeCompare(b.nombre)) 
         },
       ]);
 
