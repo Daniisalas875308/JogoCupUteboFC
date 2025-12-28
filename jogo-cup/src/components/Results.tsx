@@ -75,14 +75,14 @@ const handleSave = async (
       // Llamamos a la función del servicio que ya usa API_URL
       await updateResultadoPartido(id, golesLocal, golesVisitante, estado);
       // No hace falta refreshResults(), el WebSocket actualizará la UI automáticamente
-      if (estado === "fin") {
+      /*if (estado === "fin") {
         const [puntosLocal, puntosVisitante] = calcularPuntos(golesLocal, golesVisitante);
         console.log(`Puntos asignados - Local: ${puntosLocal}, Visitante: ${puntosVisitante}`);
 
         await actualizarPuntosEquipos(id, puntosLocal, puntosVisitante);
 
         // Aquí más adelante haremos la llamada al backend para actualizar los puntos
-      }
+      }*/
 
     } catch (err) {
       console.error("Error al actualizar partido:", err);
@@ -298,49 +298,6 @@ const handleSave = async (
         />
       )}
 
-      <div className="stats-grid-results">
-        <div className="jogo-card stats-card-results">
-          <div className="card-content">
-            <div className="stat-item-results">
-              <div className="stat-icon-results bg-blue">
-                <FaTrophy className="iconoNuevo"/>
-              </div>
-              <div className="stat-info-results">
-                <p className="stat-label-results"><strong>Partidos Jugados</strong></p>
-                <p className="stat-value-results jogo-primary">0</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="jogo-card stats-card-results">
-          <div className="card-content">
-            <div className="stat-item-results">
-              <div className="stat-icon-results bg-green">
-                <IoIosFootball className="iconoNuevo"/>
-              </div>
-              <div className="stat-info-results">
-                <p className="stat-label-results"><strong>Goles Marcados</strong></p>
-                <p className="stat-value-results text-green">0</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="jogo-card stats-card-results">
-          <div className="card-content">
-            <div className="stat-item-results">
-              <div className="stat-icon-results bg-yellow">
-                <FaUsers className="iconoNuevo"/>
-              </div>
-              <div className="stat-info-results">
-                <p className="stat-label-results"><strong>Actividades</strong></p>
-                <p className="stat-value-results jogo-accent">3</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

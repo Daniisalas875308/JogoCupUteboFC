@@ -142,28 +142,40 @@ export default function Marcador() {
   return (
     <div className={styles['scoreboard-container']}>
 
-      <main className={styles['sb-main']}>
-        {/* Partido 1 */}
-        <section className={styles['match-half']}>
-          <MatchDisplay match={matches[0]} />
-        </section>
-
-        {/* Separador de Tiempo Central */}
-        <div 
-          className={styles.timeDivider} 
-          onClick={toggleCronometro}
-          style={{ cursor: 'pointer' }}
-          title={corriendo ? "Pausar" : "Iniciar"}
-        >
-          <div className={styles.clock}>
-            {formatearTiempo(segundos)}
+      <main className={`${styles['sb-main']} ${matches.length === 1 ? styles.singleLayout : styles.dualLayout}`}>
+        
+        {matches.length === 1 ? (
+          /* --- DISEÑO PARA 1 SOLO PARTIDO --- */
+          <div className={styles.singleMatchWrapper}>
+            <div className={styles.clockTop} onClick={toggleCronometro}>
+               {formatearTiempo(segundos)}
+            </div>
+            <section className={styles.fullWidthSection}>
+              <MatchDisplay match={matches[0]} isBig={true} />
+            </section>
           </div>
-        </div>
+        ) : (
+          /* --- DISEÑO PARA 2 PARTIDOS (El que ya tenías) --- */
+          <>
+            <section className={styles['match-half']}>
+              <MatchDisplay match={matches[0]} />
+            </section>
 
-        {/* Partido 2 */}
-        <section className={styles['match-half']}>
-          <MatchDisplay match={matches[1]} />
-        </section>
+            <div 
+              className={styles.timeDivider} 
+              onClick={toggleCronometro}
+              style={{ cursor: 'pointer' }}
+            >
+              <div className={styles.clock}>
+                {formatearTiempo(segundos)}
+              </div>
+            </div>
+
+            <section className={styles['match-half']}>
+              <MatchDisplay match={matches[1]} />
+            </section>
+          </>
+        )}
       </main>
 
       <footer className={styles['sb-footer']}>
@@ -185,30 +197,27 @@ export default function Marcador() {
   );
 }
 
-function MatchDisplay({ match }: { match: Match | undefined }) {
+function MatchDisplay({ match, isBig }: { match: Match | undefined; isBig?: boolean }) {
   if (!match) return <div className={styles.noMatch}>Esperando partido...</div>;
 
   return (
-    <div className={styles.matchRow}>
-      {/* Columna Izquierda: Local */}
+    <div className={`${styles.matchRow} ${isBig ? styles.bigRow : ''}`}>
       <div className={`${styles.teamContainer} ${styles.local}`}>
-        <img src={match.equipo_local?.logo_url} className={styles.sbLogoBig} alt="logo local" />
-        <span className={styles.sbTeamName}>{match.equipo_local?.nombre}</span>
+        <img src={match.equipo_local?.logo_url} className={isBig ? styles.logoHuge : styles.sbLogoBig} alt="logo local" />
+        <span className={isBig ? styles.teamNameHuge : styles.sbTeamName}>{match.equipo_local?.nombre}</span>
       </div>
 
-      {/* Columna Central: Resultado */}
       <div className={styles.sbScoreWrapper}>
-        <div className={styles.sbScoreBox}>
-          <span className={styles.sbScore}>{match.goles_local}</span>
-          <span className={styles.sbDash}>-</span>
-          <span className={styles.sbScore}>{match.goles_visitante}</span>
+        <div className={`${styles.sbScoreBox} ${isBig ? styles.scoreBoxBig : ''}`}>
+          <span className={isBig ? styles.scoreHuge : styles.sbScore}>{match.goles_local}</span>
+          <span className={isBig ? styles.dashHuge : styles.sbDash}>-</span>
+          <span className={isBig ? styles.scoreHuge : styles.sbScore}>{match.goles_visitante}</span>
         </div>
       </div>
 
-      {/* Columna Derecha: Visitante */}
       <div className={`${styles.teamContainer} ${styles.visitante}`}>
-        <img src={match.equipo_visitante?.logo_url} className={styles.sbLogoBig} alt="logo visitante" />
-        <span className={styles.sbTeamName}>{match.equipo_visitante?.nombre}</span>
+        <img src={match.equipo_visitante?.logo_url} className={isBig ? styles.logoHuge : styles.sbLogoBig} alt="logo visitante" />
+        <span className={isBig ? styles.teamNameHuge : styles.sbTeamName}>{match.equipo_visitante?.nombre}</span>
       </div>
     </div>
   );

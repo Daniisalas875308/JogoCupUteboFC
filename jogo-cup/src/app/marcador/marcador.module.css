@@ -237,6 +237,64 @@
     object-fit: contain;
 }
 
+/* Layout cuando hay solo 1 partido */
+.singleMatchWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.clockTop {
+  font-size: 6rem; /* Reloj más grande arriba */
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 2rem;
+  font-family: 'Inter', sans-serif;
+  text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.fullWidthSection {
+  width: 90%;
+}
+
+/* Estilos aumentados para el modo "isBig" */
+.bigRow {
+  gap: 4rem;
+}
+
+.logoHuge {
+  width: 250px;
+  height: 250px;
+  object-fit: contain;
+}
+
+.teamNameHuge {
+  font-size: 4rem;
+  font-weight: 800;
+  color: white;
+  text-transform: uppercase;
+}
+
+.scoreBoxBig {
+  padding: 2rem 4rem;
+  background: transparent;
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+}
+
+.scoreHuge {
+  font-size: 10rem;
+  font-weight: 900;
+}
+
+.dashHuge {
+  font-size: 6rem;
+  margin: 0 2rem;
+}
+
 /* LA MAGIA: Animación infinita */
 @keyframes scroll {
     0% {
