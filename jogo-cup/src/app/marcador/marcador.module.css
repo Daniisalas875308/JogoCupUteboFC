@@ -101,8 +101,10 @@
   flex: 1;
 }
 
-.local { justify-content: flex-end; }
-.visitante { justify-content: flex-start; }
+.local { justify-content: flex-end;
+padding-right: 70px; }
+.visitante { justify-content: flex-start; 
+padding-left: 70px;}
 
 .sbTeamName {
   font-size: 3rem;
@@ -217,6 +219,18 @@
   box-shadow: 0 4px 15px #0000004d;
   transition: transform 0.2s ease, background-color 0.2s ease;
   user-select: none; /* Evita que se seleccione el texto al hacer click rápido */
+}
+.logoDivider {
+  position: fixed;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.logoDivider img {
+  max-width: 260px;
+  height: auto;
 }
 
 .timeDivider:hover {

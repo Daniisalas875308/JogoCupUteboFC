@@ -162,6 +162,12 @@ export default function Marcador() {
             </div>
           </div>
 
+          <div 
+            className={styles.logoDivider} 
+          >
+            <img src="/logo-final-fondo.png" alt="Logo Utebo FC" />
+          </div>
+
           {/* PARTIDO 2 (Solo aparece si existe, debajo del reloj) */}
           {matches[1] && (
             <section className={styles.matchSection}>
