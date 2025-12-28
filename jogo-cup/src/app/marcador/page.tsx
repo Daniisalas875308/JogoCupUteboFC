@@ -142,40 +142,34 @@ export default function Marcador() {
   return (
     <div className={styles['scoreboard-container']}>
 
-      <main className={`${styles['sb-main']} ${matches.length === 1 ? styles.singleLayout : styles.dualLayout}`}>
-        
-        {matches.length === 1 ? (
-          /* --- DISEÑO PARA 1 SOLO PARTIDO --- */
-          <div className={styles.singleMatchWrapper}>
-            <div className={styles.clockTop} onClick={toggleCronometro}>
-               {formatearTiempo(segundos)}
-            </div>
-            <section className={styles.fullWidthSection}>
-              <MatchDisplay match={matches[0]} isBig={true} />
-            </section>
-          </div>
-        ) : (
-          /* --- DISEÑO PARA 2 PARTIDOS (El que ya tenías) --- */
-          <>
-            <section className={styles['match-half']}>
+      <main className={styles['sb-main']}>
+        <div className={styles.matchesWrapper}>
+          
+          {/* PARTIDO 1 (Siempre se intenta mostrar arriba) */}
+          {matches[0] && (
+            <section className={styles.matchSection}>
               <MatchDisplay match={matches[0]} />
             </section>
+          )}
 
-            <div 
-              className={styles.timeDivider} 
-              onClick={toggleCronometro}
-              style={{ cursor: 'pointer' }}
-            >
-              <div className={styles.clock}>
-                {formatearTiempo(segundos)}
-              </div>
+          {/* RELOJ CENTRAL (Se mantiene en la misma posición) */}
+          <div 
+            className={styles.timeDivider} 
+            onClick={toggleCronometro}
+          >
+            <div className={styles.clockBox}>
+              {formatearTiempo(segundos)}
             </div>
+          </div>
 
-            <section className={styles['match-half']}>
+          {/* PARTIDO 2 (Solo aparece si existe, debajo del reloj) */}
+          {matches[1] && (
+            <section className={styles.matchSection}>
               <MatchDisplay match={matches[1]} />
             </section>
-          </>
-        )}
+          )}
+
+        </div>
       </main>
 
       <footer className={styles['sb-footer']}>

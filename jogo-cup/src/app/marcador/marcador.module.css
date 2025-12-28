@@ -48,7 +48,17 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  position: relative;
+  justify-content: center; /* Centra todo verticalmente */
+  align-items: center;
+  padding: 20px;
+}
+
+.matchesWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; /* Espacio entre partidos y reloj */
+  width: 100%;
 }
 
 .match-half {
@@ -60,19 +70,66 @@
 }
 
 /* El tiempo flotando en medio */
-.time-divider {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #fff;
-  color: #000;
-  padding: 10px 30px;
-  border-radius: 50px;
-  font-weight: bold;
-  font-size: 2rem;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+.timeDivider {
+  background-color: white;
+  padding: 15px 40px;
+  border-radius: 25px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  cursor: pointer;
   z-index: 10;
+}
+
+.clockBox {
+  color: black;
+  font-size: 4rem;
+  font-weight: 800;
+  font-family: 'Inter', sans-serif;
+}
+
+.matchRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+}
+
+.teamContainer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+}
+
+.local { justify-content: flex-end; }
+.visitante { justify-content: flex-start; }
+
+.sbTeamName {
+  font-size: 3rem;
+  font-weight: 800;
+  color: white;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.sbLogoBig {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+/* Los números del marcador */
+.sbScore {
+  font-size: 8rem;
+  font-weight: 900;
+  color: white;
+  text-shadow: 4px 4px 10px rgba(0,0,0,0.5);
+}
+
+.sbDash {
+  font-size: 4rem;
+  color: white;
+  margin: 0 15px;
 }
 
 /* Estructura del partido (Fila) */
@@ -123,7 +180,7 @@
 .sbScoreBox {
   /*background: rgba(255, 255, 255, 0.15);*/
   background: transparent;
-  backdrop-filter: blur(10px);
+  /*backdrop-filter: blur(10px);*/
   padding: 20px 40px;
   border-radius: 25px;
   display: flex;
@@ -147,7 +204,7 @@
 /* Ajuste para el tiempo central (el 20:00) */
 .timeDivider {
   position: absolute;
-  top: 50%;
+  top: 12%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: white;
@@ -157,7 +214,7 @@
   font-weight: 700;
   font-size: 5.5rem;
   z-index: 20;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 15px #0000004d;
   transition: transform 0.2s ease, background-color 0.2s ease;
   user-select: none; /* Evita que se seleccione el texto al hacer click rápido */
 }
@@ -263,6 +320,7 @@
 /* Estilos aumentados para el modo "isBig" */
 .bigRow {
   gap: 4rem;
+  padding-top: 30px;
 }
 
 .logoHuge {
